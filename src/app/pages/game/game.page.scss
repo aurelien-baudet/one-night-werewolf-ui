@@ -1,0 +1,57 @@
+@import "../../../variables";
+
+:host {
+    display: block;
+    text-align: center;
+}
+
+app-board,
+app-voting-board,
+app-video-board {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 138px;
+}
+
+app-night-progress {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+}
+
+app-timer,
+.vote {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: $message-text-color;
+    font-size: 2em;
+}
+
+.start,
+.restart,
+.distribute {
+   position: relative;
+   z-index: 1000;
+}
+
+p {
+    margin: 0;
+}
+
+@media (max-width: 400px) {
+    app-board,
+    app-voting-board,
+    app-video-board {
+        bottom: 70px;
+    }
+}

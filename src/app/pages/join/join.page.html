@@ -1,0 +1,35 @@
+<form #addForm="ngForm" (submit)="addPlayer(newPlayer); addForm.reset()">
+  <p>Ajouter chaque joueur qui jouera sur cet appareil</p>
+  <p *ngIf="!isEverybodyReady()">
+    Le jeu débutera lorsque tous les joueurs auront rejoint la partie
+  </p>
+  <label for="name">Nom du joueur</label>
+  <input type="text" name="name" id="name" placeholder="Nom du joueur" required [(ngModel)]="newPlayer.name" />
+  <button class="add-player" type="submit">ajouter</button>
+</form>
+<div class="players-container" 
+  [ngClass]="getNumPlayersClass()" 
+  [class.disabled]="!canPlay"
+  [class.distributed]="distributed">
+  <div class="player"
+    *ngFor="let player of uiPlayers; let idx=index"
+    [ngClass]="getPlayerClass(idx)">
+    <app-player 
+      *ngIf="isPlayerReady(player)"
+      [player]="player.playerInfo"
+      [class.ready]="isPlayerReady(player)"></app-player>
+    <button 
+      class="quit"
+      *ngIf="isPlayerReady(player)"
+      (click)="removePlayer(player.playerInfo)">quitter</button>
+    <div 
+      *ngIf="!isPlayerReady(player)" 
+      [class.waiting]="!isPlayerReady(player)">
+      <span>En attente...</span>
+    </div>
+  </div>
+</div>
+<app-video-board
+  [numPlayers]="numPlayers"
+  [players]="players"
+  [streams]="streams"></app-video-board>

@@ -1,0 +1,45 @@
+@import "variables";
+
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+@function card-width($percent) {
+    $ratio: strip-unit($percent) / 100;
+    @return floor($card-image-width * $ratio);
+}
+
+@function card-height($percent) {
+    $ratio: strip-unit($percent) / 100;
+    @return floor($card-image-height * $ratio);
+}
+
+@function card-radius($percent) {
+    $ratio: strip-unit($percent) / 100;
+    @return floor(11 * $ratio);
+}
+
+@mixin card-size($percent) {
+    $ratio: strip-unit($percent) / 100;
+    width: #{card-width($percent)}px;
+    height: #{card-height($percent)}px;
+    border-radius: #{card-radius($percent)}px;
+}
+
+@mixin rotate($degrees) {
+    -webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
+    -ms-transform: rotate($degrees);
+    -o-transform: rotate($degrees);
+    transform: rotate($degrees);
+    // -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=#{-1*sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+    // filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=#{-1*sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+}
+
+@function player-color($i) {
+    @return nth($player-colors, $i);
+}

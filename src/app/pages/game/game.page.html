@@ -1,0 +1,50 @@
+<button class="distribute" 
+  *ngIf="displayDistributeButton()" 
+  (click)="distribute()">distribuer</button>
+<button class="start" 
+  *ngIf="displayStartButton()" 
+  (click)="start()">démarrer</button>
+<button class="restart" 
+  *ngIf="displayRestartButton()" 
+  (click)="restart()">rejouer</button>
+<app-board 
+  *ngIf="displayBoard()"
+  [board]="board" 
+  [players]="players"
+  [canViewCard]="isGameNotStarted()"
+  [canPlay]="isNight() || isGameEnded()"
+  [enableDistributionEffect]="!isGameEnded()"
+  (returnCard)="viewCard($event)"
+  (switchCards)="switchCards($event)"
+  [deadPlayers]="voteResult && voteResult.deads"
+  [winners]="voteResult && showWinners && voteResult.winners"
+  [loosers]="voteResult && showWinners && voteResult.loosers"></app-board>
+<app-voting-board 
+  *ngIf="displayVotingBoard()"
+  [board]="board" 
+  [players]="players"
+  [deadPlayers]="voteResult && voteResult.deads"
+  [votes]="currentVotes"
+  (voted)="vote($event)"></app-voting-board>
+<app-night-progress 
+  *ngIf="displayNightProgress()"
+  [roles]="playingRoles" 
+  [currentRole]="currentRole"></app-night-progress>
+<app-timer 
+  *ngIf="displayDiscussionTimer()"
+  class="discussion"
+  [durationMs]="board.remainingDiscussionDuration"
+  format="mm:ss"></app-timer>
+<app-timer 
+  *ngIf="displayVoteTimer()"
+  class="vote"
+  [durationMs]="board.remainingVoteDuration"
+  format="s"></app-timer>
+<p 
+  *ngIf="displayVoteMessage()"
+  class="vote">Votez !</p>
+<app-video-board
+  *ngIf="players && streams"
+  [numPlayers]="players.length"
+  [players]="players"
+  [streams]="streams"></app-video-board>

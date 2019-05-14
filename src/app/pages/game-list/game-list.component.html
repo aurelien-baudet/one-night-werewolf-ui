@@ -1,0 +1,17 @@
+<button (click)="newGame()">Nouvelle partie</button>
+<ul>
+  <li *ngFor="let game of games">
+    <div class="players">
+      <app-player 
+        *ngFor="let player of game.players; let idx = index" 
+        [player]="player"
+        [ngClass]="getPlayerClass(idx)"></app-player>
+      <span class="waiting" *ngFor="let waiting of getWaitingPlayers(game)">en attente</span>
+    </div>
+    <div class="roles">
+      <app-card *ngFor="let role of game.selectedRoles"
+        [card]="getCard(role)"></app-card>
+    </div>
+    <button class="join" (click)="join(game)" *ngIf="canJoin(game)">rejoindre</button>
+  </li>
+</ul>

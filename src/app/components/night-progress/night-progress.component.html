@@ -1,0 +1,10 @@
+<div class="night-progress">
+    <ul>
+        <li *ngFor="let role of roles" [class.current]="currentRole && role.name === currentRole.name">
+            <app-card [card]="roleToCard(role)"></app-card>
+        </li>
+    </ul>
+    <div class="action">
+        <span *ngIf="currentRole">{{ currentRole.nightAction }}</span>
+    </div>
+</div>

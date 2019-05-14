@@ -1,27 +1,22 @@
-# WerewolfUi
+ng serve --host 0.0.0.0 --disableHostCheck
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+http-server -P http://localhost:4200/ -S -p 8081
 
-## Development server
+http-server -S --cors -P http://localhost:8080 -p 8082
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://192.168.0.22:4443/ openvidu/openvidu-server-kms:2.9.0
 
-## Code scaffolding
+docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=https://werewolf.localdomain.com/openvidu/ openvidu/openvidu-server-kms:2.9.0
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+[TODO]
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- [P2] Arrêter une partie
+- [P2] Mettre en pause une partie
+  - proposer de quitter la partie (retour liste des parties)
+  - proposer de recommencer une partie avec les mêmes options
+  - proposer de changer les options
+- [P2] Retourner à la liste des parties à tout moment
+- [P3] Musique d'ambiance
+- [P3] Choisir les options (musique d'ambiance, temps, ...)
+- [P3] Positionner correctement les images (dead, looser, winner) en fonction de la taille de la caméra (calculer ratio pour chaque video ou utiliser du js pour positionner ?). Dépend de la taille de chaque device

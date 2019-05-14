@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let role of availableRoles; let i=index" 
+      (click)="toggleRoleSelection(i)" 
+      [class.selected]="isRoleSelected(i)">
+    <app-card [card]="roleToCard(role)"></app-card>
+  </li>
+</ul>

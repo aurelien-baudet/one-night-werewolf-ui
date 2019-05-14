@@ -1,0 +1,28 @@
+<div class="players-container" 
+  [ngClass]="getNumPlayersClass()" 
+  [class.disabled]="!canPlay"
+  [class.distributed]="distributed"
+  [class.distributing]="distributing">
+  <div class="player" *ngFor="let player of players; let idx=index"
+    (click)="$event.stopPropagation(); this.playerSelection.toggleSelection(player)" 
+    [ngClass]="getPlayerClass(idx)"
+    [class.selected]="this.playerSelection.isSelected(player)"
+    [class.dead]="isDead(player)"
+    [class.winner]="isWinner(player)"
+    [class.looser]="isLooser(player)">
+    <app-player [player]="player"></app-player>
+  </div>
+  <div class="cards">
+    <app-card *ngFor="let card of getCards(); let idx=index" 
+      [card]="card" 
+      (click)="$event.stopPropagation()"
+      (dblclick)="$event.stopPropagation(); toggleViewCard(card)"
+      [ngClass]="getCardClass(card)"
+      [class.over]="isOver(card)"
+      [class.dragging]="isDragging(card)"
+      [draggable]="this.playerSelection.someSelection()"
+      (dragstart)="drag($event, card)"
+      (dragover)="dragover($event, card)"
+      (drop)="drop($event, card)"></app-card>
+  </div>
+</div>

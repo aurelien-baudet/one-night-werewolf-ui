@@ -1,0 +1,5 @@
+<app-roles-selection 
+    [availableRoles]="availableRoles" 
+    (roleSelectionChange)="updateSelectedRoles($event)"></app-roles-selection>
+<div class="duration"></div>
+<button (click)="createGame()">créer une partie</button>

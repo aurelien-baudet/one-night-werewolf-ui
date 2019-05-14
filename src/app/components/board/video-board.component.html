@@ -1,0 +1,10 @@
+<div class="videos-container"
+  [ngClass]="getNumPlayersClass()">
+  <div class="player-video"
+    *ngFor="let stream of streams"
+    [ngClass]="getPlayerClass(getPlayerIdx(stream.player))">
+    <ov-video
+      *ngIf="!!stream.streamManager"
+      [streamManager]="stream.streamManager"></ov-video>
+  </div>
+</div>

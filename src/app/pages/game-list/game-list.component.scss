@@ -1,0 +1,84 @@
+@import "../../../mixins";
+
+$cards-size-percent: 35%;
+
+ul, li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    display: flex;
+    // flex-direction: row;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+}
+
+li {
+    display: flex;
+    flex: 1 1 400px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+}
+
+:host {
+    display: block;
+    text-align: center;
+}
+
+
+button.join {
+    font-size: 1em;
+    margin: 10px;
+}
+
+.players {
+    display: flex;
+    margin: 10px 5px;  
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.roles {
+    display: flex;
+    margin: 10px 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+app-player,
+.waiting {
+    display: flex;
+    width: 70px;
+    height: 100px;
+    background: url('../../../assets/players/user-64.png') no-repeat center 10px;
+    // border: 1px solid #eee;
+    margin: 2px 10px;
+    text-align: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000;
+}
+.waiting {
+    color: #ccc;
+}
+
+@for $i from 0 to 5 {
+    app-player.player#{$i} /deep/ .name {
+        color: player-color($i + 1);
+    }
+    app-player.player#{$i} {
+        filter: opacity(.5) drop-shadow(0 0 0 player-color($i + 1))
+    }
+}
+
+app-card /deep/ .card {
+    @include card-size($cards-size-percent);
+    margin: 2px;
+}
