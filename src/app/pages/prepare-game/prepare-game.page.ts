@@ -28,7 +28,8 @@ export class PrepareGamePage implements OnInit {
   }
 
   createGame() {
-    this.gamePreparationService.newGame(this.selectedRoles, null)
+    // TODO: handle options
+    this.gamePreparationService.newGame(this.selectedRoles, new DefaultGameOptions())
       .subscribe((game) => this.router.navigate(['games', game.id, 'join']));
   }
 

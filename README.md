@@ -17,6 +17,5 @@ docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=
   - proposer de recommencer une partie avec les mêmes options
   - proposer de changer les options
 - [P2] Retourner à la liste des parties à tout moment
-- [P3] Musique d'ambiance
 - [P3] Choisir les options (musique d'ambiance, temps, ...)
 - [P3] Positionner correctement les images (dead, looser, winner) en fonction de la taille de la caméra (calculer ratio pour chaque video ou utiliser du js pour positionner ?). Dépend de la taille de chaque device

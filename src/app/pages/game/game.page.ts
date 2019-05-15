@@ -33,6 +33,7 @@ export class GamePage implements OnInit, OnDestroy {
   private subscriptions: Subscription[];
   private timers: any[];
   private sounds: HTMLAudioElement;
+  private music: HTMLAudioElement = new Audio();
   private uuid: string;
   showWinners = false;
   players: Player[];
@@ -101,6 +102,7 @@ export class GamePage implements OnInit, OnDestroy {
     if (this.sounds) {
       this.sounds.pause();
     }
+    this.stopMusic();
   }
 
   private async reset() {
@@ -160,39 +162,45 @@ export class GamePage implements OnInit, OnDestroy {
     } else if (this.board.phase === Phase.VOTE && !this.isGameEnded()) {
       this.prepareToVote();
     }
+    // play background music
+    if ((this.board.phase === Phase.SUNSET || this.isNight()) && !this.isGameEnded()) {
+      this.playMusic();
+    } else {
+      this.stopMusic();
+    }
   }
 
   private everyoneCloseEyes() {
-    this.playSound(`everyone-close-eyes`);
+    this.playSound(`fr_male_everyone_close`);
   }
 
   private wakeUp(role: Role) {
-    this.playSound(`${role.name}-wake-up`);
+    this.playSound(`fr_male_${role.name}_wake`);
   }
 
   private closeEyes(role: Role) {
-    this.playSound(`${role.name}-close-eyes`);
+    this.playSound(`fr_male_${role.name}_close`);
   }
 
   private everyoneWakeUp() {
-    this.playSound(`everyone-wake-up`);
+    this.playSound(`fr_male_everyone_wake`);
   }
 
   private informRemainingTime() {
     if (this.board.remainingDiscussionDuration === Duration.fromObject({minute: 1}).as('milliseconds')) {
-      this.playSound('1-minute-left');
+      this.playSound('fr_male_timer_1min');
     }
     if (this.board.remainingDiscussionDuration === Duration.fromObject({seconds: 30}).as('milliseconds')) {
-      this.playSound('30-seconds-left');
+      this.playSound('fr_male_timer_30sec');
     }
   }
 
   private prepareToVote() {
     if (this.board.remainingVoteDuration > Duration.fromObject({seconds: 3}).as('milliseconds')) {
-      this.playSound(`prepare-to-vote`);
+      this.playSound(`fr_male_everyone_timeisup`);
     }
     if (this.board.remainingVoteDuration === Duration.fromObject({seconds: 3}).as('milliseconds')) {
-      this.playSound(`vote-countdown`);
+      this.playSound(`fr_male_321vote`);
     }
   }
 
@@ -207,6 +215,23 @@ export class GamePage implements OnInit, OnDestroy {
     this.sounds.src = `assets/sounds/${sound}.mp3`;
     this.sounds.load();
     this.sounds.play();
+  }
+
+
+  private playMusic() {
+    const source = `assets/sounds/background_${this.game.gameOptions.backgroundMusic}.mp3`;
+    if (this.music.src.indexOf(source) !== -1) {
+      return;
+    }
+    this.music.loop = true;
+    this.music.volume = this.game.gameOptions.backgroundMusicVolume;
+    this.music.src = source;
+    this.music.load();
+    this.music.play();
+  }
+
+  private stopMusic() {
+    this.music.pause();
   }
 
   isGameNotStarted() {

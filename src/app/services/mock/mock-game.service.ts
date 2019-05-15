@@ -19,7 +19,7 @@ export class MockGameService implements GameService {
   }
 
   public replayGame(game: Game): Observable<Game> {
-    return this.newGame(game.selectedRoles, game.options);
+    return this.newGame(game.selectedRoles, game.gameOptions);
   }
 
   public getGame(gameId: string): Observable<Game> {
