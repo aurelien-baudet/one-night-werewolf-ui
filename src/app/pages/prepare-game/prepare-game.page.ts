@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./prepare-game.page.scss']
 })
 export class PrepareGamePage implements OnInit {
-  private availableRoles: Role[];
   private selectedRoles: Role[] = [];
+  availableRoles: Role[];
 
   constructor(private roleService: RoleService,
               private gamePreparationService: GameService,

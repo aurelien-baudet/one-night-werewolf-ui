@@ -27,8 +27,8 @@ export class OpenViduVideoComponent implements AfterViewInit, OnDestroy {
 
   @Input() mutedSound: boolean;
 
-  private _streamManager: StreamManager;
   private playing = false;
+  _streamManager: StreamManager;
 
 
   ngAfterViewInit() {

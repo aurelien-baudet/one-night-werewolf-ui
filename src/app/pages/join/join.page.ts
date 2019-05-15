@@ -26,11 +26,11 @@ class WaitingPlayer implements UiPlayer {
   styleUrls: ['./join.page.scss']
 })
 export class JoinPage implements OnInit, OnDestroy {
-  private players: Player[] = [];
-  private uiPlayers: UiPlayer[] = [];
   private gameId: string;
   private playersSubsciption: Subscription;
   private uuid: string;
+  players: Player[] = [];
+  uiPlayers: UiPlayer[] = [];
   streams: PlayerVideoStream[] = [];
   newPlayer: NewPlayer = {name: ''};
   numPlayers = 0;

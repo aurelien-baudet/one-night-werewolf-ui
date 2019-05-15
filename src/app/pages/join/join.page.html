@@ -8,9 +8,7 @@
   <button class="add-player" type="submit">ajouter</button>
 </form>
 <div class="players-container" 
-  [ngClass]="getNumPlayersClass()" 
-  [class.disabled]="!canPlay"
-  [class.distributed]="distributed">
+  [ngClass]="getNumPlayersClass()">
   <div class="player"
     *ngFor="let player of uiPlayers; let idx=index"
     [ngClass]="getPlayerClass(idx)">
