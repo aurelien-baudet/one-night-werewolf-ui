@@ -7,317 +7,287 @@ $transition-duration: 0.2s;
 
 .players-container,
 .videos-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    user-select: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  user-select: none;
 }
 
 .player {
+  position: absolute;
+  z-index: 100;
+  border: 1px solid transparent;
+  
+  /deep/ .name,
+  .name {
+    display: block;
     position: absolute;
-    z-index: 100;
-    border: 1px solid transparent;
-    
-    /deep/ .name,
-    .name {
-        display: block;
-        position: absolute;
-        left: 0;
-        text-align: center;
-        text-shadow: 1px 1px 1px #000;
-    }
+    left: 0;
+    text-align: center;
+    text-shadow: 1px 1px 1px #000;
+  }
 
-    &.selected {
-        border: 1px solid $selection-color;
-    }
-    
-    &.dead:before,
-    &.winner:before,
-    &.looser:before {
-        content: "";
-        position: absolute;
-        display: block;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        max-width: 475px;
-    }
-    &.dead:before {
-        background: url('../../../assets/result/dead.png') center center no-repeat;
-        opacity: 0.8;
-        background-size: contain;
-    }
-    &.winner:before {
-        background: url('../../../assets/result/winner.png') bottom center no-repeat;
-        opacity: 0.8;
-        background-size: contain;
-    }
-    &.looser:before {
-        background: url('../../../assets/result/looser.png') bottom center no-repeat;
-        opacity: 0.8;
-        background-size: contain;
-    }
+  &.selected {
+    border: 1px solid $selection-color;
+  }
+  
+  &.dead:before,
+  &.winner:before,
+  &.looser:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 475px;
+  }
+  &.dead:before {
+    background: url('../../../assets/result/dead.png') center center no-repeat;
+    opacity: 0.8;
+    background-size: contain;
+  }
+  &.winner:before {
+    background: url('../../../assets/result/winner.png') bottom center no-repeat;
+    opacity: 0.8;
+    background-size: contain;
+  }
+  &.looser:before {
+    background: url('../../../assets/result/looser.png') bottom center no-repeat;
+    opacity: 0.8;
+    background-size: contain;
+  }
 }
 
 @for $i from 0 to 5 {
-    .player#{$i} app-player /deep/ .name {
-        color: player-color($i + 1);
-    }
+  .player#{$i} app-player /deep/ .name {
+    color: player-color($i + 1);
+  }
 }
 
 
 .player-video {
-    display: block;
-    position: absolute;
-    border: 1px solid transparent;
+  display: block;
+  position: absolute;
+  border: 1px solid transparent;
 }
 ov-video {
-    position: absolute;
-    display: block;
-    width: 100%;
+  position: absolute;
+  display: block;
+  width: 100%;
 }
 
 
 // TODO
 .numPlayers4 {
-    .player {
-        width: 50%;
-        height: 50%;
-    }
-    .player.player0 {
-        top: 0;
-        left: 0;
-    }
-    .player.player1 {
-        top: 0;
-        right: 0;
-    }
-    .player.player2 {
-        bottom: 0;
-        left: 0;
-    }
-    .player.player3 {
-        bottom: 0;
-        right: 0;
-    }
+  .player {
+    width: 50%;
+    height: 50%;
+  }
+  .player.player0 {
+    top: 0;
+    left: 0;
+  }
+  .player.player1 {
+    top: 0;
+    right: 0;
+  }
+  .player.player2 {
+    bottom: 0;
+    left: 0;
+  }
+  .player.player3 {
+    bottom: 0;
+    right: 0;
+  }
 }
 
 
 .numPlayers5 {
-    .player,
-    .player-video {
-        width: 30%;
-        height: 30%;
+  .player,
+  .player-video {
+    width: 30%;
+    height: 30%;
 
-        ov-video /deep/ video {
-            max-width: 475px;
-        }
+    ov-video /deep/ video {
+      max-width: 475px;
     }
-    .player.player0,
-    .player-video.player0 {
-        top: 50px;
-        left: 10px;
+  }
+  .player.player0,
+  .player-video.player0 {
+    top: 50px;
+    left: 10px;
 
-        ov-video,
-        /deep/ .name {
-            top: 0;
-        }
+    ov-video,
+    /deep/ .name {
+      top: 0;
     }
-    .player.player1,
-    .player-video.player1 {
-        top: 50px;
-        right: 10px;
+  }
+  .player.player1,
+  .player-video.player1 {
+    top: 50px;
+    right: 10px;
 
-        ov-video,
-        /deep/ .name {
-            top: 0;
-        }
+    ov-video,
+    /deep/ .name {
+      top: 0;
     }
-    .player.player2,
-    .player-video.player2 {
-        bottom: 50px;
-        left: 10px;
+  }
+  .player.player2,
+  .player-video.player2 {
+    bottom: 50px;
+    left: 10px;
 
-        ov-video,
-        /deep/ .name {
-            bottom: 0;
-        }
+    ov-video,
+    /deep/ .name {
+      bottom: 0;
     }
-    .player.player3,
-    .player-video.player3 {
-        bottom: 0;
-        left: 34.5%;
-        margin-left: 1px;
+  }
+  .player.player3,
+  .player-video.player3 {
+    bottom: 0;
+    left: 34.5%;
+    margin-left: 1px;
 
-        ov-video,
-        /deep/ .name {
-            bottom: 0;
-        }
+    ov-video,
+    /deep/ .name {
+      bottom: 0;
     }
-    .player.player4,
-    .player-video.player4 {
-        bottom: 50px;
-        right: 10px;
+  }
+  .player.player4,
+  .player-video.player4 {
+    bottom: 50px;
+    right: 10px;
 
-        ov-video,
-        /deep/ .name {
-            bottom: 0;
-        }
+    ov-video,
+    /deep/ .name {
+      bottom: 0;
     }
+  }
 }
 
 
 
 @media (max-height: 350px) {
-    .numPlayers5 {
-        // .player,
-        // .player-video {
-        // }
-        .player.player0,
-        .player-video.player0,
-        .player.player1,
-        .player-video.player1 {
-            top: 0;
-        }
-        // .player.player2,
-        // .player-video.player2 {
-        //     bottom: 50px;
-        //     left: 0;
-
-        //     /deep/ .name {
-        //         bottom: -30px;
-        //     }
-        // }
-        // .player.player3,
-        // .player-video.player3 {
-        //     bottom: 0;
-        //     left: 34.5%;
-
-        //     /deep/ .name {
-        //         bottom: -30px;
-        //     }
-        // }
-        // .player.player4,
-        // .player-video.player4 {
-        //     bottom: 50px;
-        //     right: 0;
-
-        //     /deep/ .name {
-        //         bottom: -30px;
-        //     }
-        // }
-    } 
+  .numPlayers5 {
+    .player.player0,
+    .player-video.player0,
+    .player.player1,
+    .player-video.player1 {
+      top: 0;
+    }
+  } 
 }
 
 @media (max-width: 400px) {
-    .numPlayers5 {
-        .player,
-        .player-video {
-            &.dead:before {
-                // TODO: more flexible
-                background-size: auto 81px;
-            }
-            &.looser:before,
-            &.winner:before {
-                background-size: contain;
-            }
-        }
-        .player.player0,
-        .player-video.player0,
-        .player.player1,
-        .player-video.player1 {
-            &.dead:before {
-                background-position-y: top;
-            }
-            &.looser:before,
-            &.winner:before {
-                // TODO: more flexible
-                background-position-y: 57px;
-            }
-        }
-        .player.player2,
-        .player-video.player2,
-        .player.player3,
-        .player-video.player3,
-        .player.player4,
-        .player-video.player4 {
-            &.dead:before {
-                background-position-y: bottom;
-            }
-            // &.looser:before,
-            // &.winner:before {
-            //     // TODO: more flexible
-            //     background-position-y: 57px;
-            // }
-        }
+  .numPlayers5 {
+    .player,
+    .player-video {
+      &.dead:before {
+        // TODO: more flexible
+        background-size: auto 81px;
+      }
+      &.looser:before,
+      &.winner:before {
+        background-size: contain;
+      }
     }
+    .player.player0,
+    .player-video.player0,
+    .player.player1,
+    .player-video.player1 {
+      &.dead:before {
+        background-position-y: top;
+      }
+      &.looser:before,
+      &.winner:before {
+        // TODO: more flexible
+        background-position-y: 57px;
+      }
+    }
+    .player.player2,
+    .player-video.player2,
+    .player.player3,
+    .player-video.player3,
+    .player.player4,
+    .player-video.player4 {
+      &.dead:before {
+        background-position-y: bottom;
+      }
+      // &.looser:before,
+      // &.winner:before {
+      //     // TODO: more flexible
+      //     background-position-y: 57px;
+      // }
+    }
+  }
 }
 
 
 @media (min-width: 1580px) {
-    .numPlayers5 {
-        .player,
-        .player-video {
-            height: 42%;
-        }
-        .player.player0,
-        .player-video.player0 {
-            &:before {
-                right: 0;
-                left: auto;
-            }
-            ov-video /deep/ video {
-                margin-right: 0;
-                margin-left: auto;
-            }
-        }
-        .player.player1,
-        .player-video.player1 {
-            &:before {
-                left: 0;
-                right: auto;
-            }
-            ov-video /deep/ video {
-                margin-left: 0;
-                margin-right: auto;
-            }
-        }
-        .player.player2,
-        .player-video.player2 {
-            &:before {
-                right: 0;
-                left: auto;
-            }
-            ov-video /deep/ video {
-                margin-right: 0;
-                margin-left: auto;
-            }
-        }
-        .player.player3,
-        .player-video.player3 {
-            &:before {
-                width: auto;
-                left: 0;
-                right: 0;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            ov-video /deep/ video {
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-        .player.player4,
-        .player-video.player4 {
-            &:before {
-                left: 0;
-                right: auto;
-            }
-            ov-video /deep/ video {
-                margin-left: 0;
-                margin-right: auto;
-            }
-        }
-    } 
+  .numPlayers5 {
+    .player,
+    .player-video {
+      height: 42%;
+    }
+    .player.player0,
+    .player-video.player0 {
+      &:before {
+        right: 0;
+        left: auto;
+      }
+      ov-video /deep/ video {
+        margin-right: 0;
+        margin-left: auto;
+      }
+    }
+    .player.player1,
+    .player-video.player1 {
+      &:before {
+        left: 0;
+        right: auto;
+      }
+      ov-video /deep/ video {
+        margin-left: 0;
+        margin-right: auto;
+      }
+    }
+    .player.player2,
+    .player-video.player2 {
+      &:before {
+        right: 0;
+        left: auto;
+      }
+      ov-video /deep/ video {
+        margin-right: 0;
+        margin-left: auto;
+      }
+    }
+    .player.player3,
+    .player-video.player3 {
+      &:before {
+        width: auto;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      ov-video /deep/ video {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    .player.player4,
+    .player-video.player4 {
+      &:before {
+        left: 0;
+        right: auto;
+      }
+      ov-video /deep/ video {
+        margin-left: 0;
+        margin-right: auto;
+      }
+    }
+  } 
 }

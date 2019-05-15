@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { PrepareGamePage } from './pages/prepare-game/prepare-game.page';
 import { JoinPage } from './pages/join/join.page';
 import { GamePage } from './pages/game/game.page';
-import { GameList } from './pages/game-list/game-list.component';
+import { GameListPage } from './pages/game-list/game-list.component';
 
 const routes: Routes = [{
   path: 'games',
-  component: GameList,
+  component: GameListPage,
   pathMatch: 'full'
 }, {
   path: 'games/new',

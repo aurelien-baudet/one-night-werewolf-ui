@@ -48,7 +48,7 @@ export class OpenViduVideoComponent implements AfterViewInit, OnDestroy {
     // video autoplay:
     // - https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
     // - https://developers.google.com/web/updates/2018/11/web-audio-autoplay
-    if(!!this.elementRef && !this.playing) {
+    if (!!this.elementRef && !this.playing) {
         this.elementRef.nativeElement.play()
           .then(() => this.playing = true)
           .catch((e) => console.error('playing failed', event, e, e.message));
@@ -57,7 +57,7 @@ export class OpenViduVideoComponent implements AfterViewInit, OnDestroy {
 
   @Input()
   set streamManager(streamManager: StreamManager) {
-    if(this._streamManager === streamManager) {
+    if (this._streamManager === streamManager) {
         return;
     }
     this._streamManager = streamManager;
@@ -73,7 +73,7 @@ export class OpenViduVideoComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-      if(this._streamManager) {
+      if (this._streamManager) {
           this._streamManager.disassociateVideo(this.elementRef.nativeElement);
       }
   }

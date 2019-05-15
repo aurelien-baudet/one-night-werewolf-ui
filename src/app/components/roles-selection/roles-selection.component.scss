@@ -2,35 +2,35 @@
 @import "../../../mixins";
 
 ul, li {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 li {
-    display: inline-block;
-    margin: 5px;
-    border: 2px solid transparent;
-    border-radius: #{card-radius(50%)}px;
-
-    &.selected {
-        border-color: $selection-color;
-    }
+  display: inline-block;
+  margin: 5px;
+  border: 2px solid transparent;
+  border-radius: #{card-radius(50%)}px;
+  
+  &.selected {
+    border-color: $selection-color;
+  }
 }
 li /deep/ app-card {
-    .card {
-        @include card-size(50%);
-    }
+  .card {
+    @include card-size(50%);
+  }
 }
 
 @media (max-width: 800px) {
-    li {
-        border-radius: #{card-radius(30%)}px;
-
-        /deep/ app-card {
-            .card {
-                @include card-size(30%);
-            }
-        }
+  li {
+    border-radius: #{card-radius(30%)}px;
+    
+    /deep/ app-card {
+      .card {
+        @include card-size(30%);
+      }
     }
+  }
 }

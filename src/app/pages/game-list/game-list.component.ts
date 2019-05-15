@@ -12,7 +12,7 @@ import { BoardUtils } from 'src/app/components/board/utils';
   templateUrl: './game-list.component.html',
   styleUrls: ['./game-list.component.scss']
 })
-export class GameList implements OnInit {
+export class GameListPage implements OnInit {
   games: Game[];
 
   constructor(private gameService: GameService,

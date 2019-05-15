@@ -36,7 +36,7 @@ import { VoteService } from './services/vote.service';
 import { StompVoteService } from './services/remote/stomp-vote.service';
 import { MockVoteService } from './services/mock/mock-vote.service';
 import { InMemoryVoteService } from './services/mock/in-memory-vote.service';
-import { GameList } from './pages/game-list/game-list.component';
+import { GameListPage } from './pages/game-list/game-list.component';
 import { StompVideoService } from './services/remote/stomp-video.service';
 import { VideoService } from './services/video.service';
 import { LocalStorageUuidService } from './services/local/local-storage-uui.service';
@@ -58,7 +58,7 @@ import { VideoBoardComponent } from './components/board/video-board.component';
     RolesSelectionComponent,
     BoardComponent,
     VotingBoardComponent,
-    GameList,
+    GameListPage,
     OpenViduVideoComponent,
     VideoBoardComponent
   ],

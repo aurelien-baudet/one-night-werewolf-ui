@@ -9,11 +9,11 @@ import { Player, PlayerRef, NewPlayer } from 'src/app/domain/Player';
 })
 export class MockPlayerService implements PlayerService {
   private players: Player[] = [
-    new Player("1", "Yo"),
-    new Player("2", "Cécé"),
-    new Player("3", "Guigui"),
-    new Player("4", "Roma"),
-    new Player("5", "Moi")
+    new Player('1', 'Yo'),
+    new Player('2', 'Cécé'),
+    new Player('3', 'Guigui'),
+    new Player('4', 'Roma'),
+    new Player('5', 'Moi')
   ];
   private players$: Subject<Player[]> = new BehaviorSubject([]);
 

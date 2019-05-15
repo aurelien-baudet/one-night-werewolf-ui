@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Duration } from "luxon";
+import { Duration } from 'luxon';
 
 @Component({
   selector: 'app-timer',

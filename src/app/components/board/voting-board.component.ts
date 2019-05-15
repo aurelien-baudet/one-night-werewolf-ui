@@ -40,7 +40,7 @@ export class VotingBoardComponent {
 
 
   getVotesAgainstPlayer(player: Player): Player[] {
-    if(!this.votes || !this.players) {
+    if (!this.votes || !this.players) {
       return [];
     }
     return this.votes
@@ -50,7 +50,7 @@ export class VotingBoardComponent {
   }
 
   hasVoted(player: Player) {
-    if(!this.votes) {
+    if (!this.votes) {
       return false;
     }
     const votes = this.votes
@@ -72,12 +72,12 @@ export class VotingBoardComponent {
   drop(event: CdkDragDrop<Player[]>, against: Player) {
     const voter = event.item.data;
     // can't vote for self
-    if(voter.id === against.id) {
+    if (voter.id === against.id) {
       return;
     }
     // if voter has already voted against the same player
     // => cancel
-    if(this.hasVotedAgainst(voter, against)) {
+    if (this.hasVotedAgainst(voter, against)) {
       return;
     }
     this.vote(voter, against);
@@ -89,7 +89,7 @@ export class VotingBoardComponent {
   }
 
   isDead(player: Player) {
-    if(!this.deadPlayers) {
+    if (!this.deadPlayers) {
       return false;
     }
     return this.deadPlayers.find((p) => p.id === player.id);

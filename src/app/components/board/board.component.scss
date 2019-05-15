@@ -5,206 +5,206 @@
 $distribution-transition-delay-offset: 0.2s;
 
 @mixin place-cards($cards-size-percent) {
-    app-card {
+  app-card {
+    margin-left: #{- card-width($cards-size-percent) / 2}px;
+    margin-top: #{card-height($cards-size-percent)}px;
+    
+    /deep/ .card {
+      @include card-size($cards-size-percent);
+    }
+  }
+  .distributed {
+    app-card.center-card {
+      margin-top: #{- card-height($cards-size-percent) / 2}px;
+    }
+    app-card.center-card.place0 {
+      margin-left: #{- card-width($cards-size-percent) * 1.5 - 10}px;
+    }
+    app-card.center-card.place1 {
+      margin-left: #{- card-width($cards-size-percent) / 2}px;
+    }
+    app-card.center-card.place2 {
+      margin-left: #{card-width($cards-size-percent) / 2 + 10}px;
+    }
+  }
+  
+  .numPlayers5 {
+    &.distributed {
+      app-card.player0 {
+        margin-top: #{- card-height($cards-size-percent) * 1.5}px;
+        margin-left: #{- card-width($cards-size-percent) * 3}px;
+      }
+      app-card.player1 {
+        margin-top: #{- card-height($cards-size-percent) * 1.5}px;
+        margin-left: #{card-width($cards-size-percent) * 2}px;
+      }
+      app-card.player2 {
+        margin-top: #{card-height($cards-size-percent) / 2}px;
+        margin-left: #{- card-width($cards-size-percent) * 3}px;
+      }
+      app-card.player3 {
+        margin-top: #{card-height($cards-size-percent) / 2 + 10}px;
         margin-left: #{- card-width($cards-size-percent) / 2}px;
-        margin-top: #{card-height($cards-size-percent)}px;
-
-        /deep/ .card {
-            @include card-size($cards-size-percent);
-        }
+      }
+      app-card.player4 {
+        margin-left: #{card-height($cards-size-percent) * 1.5}px;
+        margin-top: #{card-width($cards-size-percent) / 2}px;
+      }
     }
-    .distributed {
-        app-card.center-card {
-            margin-top: #{- card-height($cards-size-percent) / 2}px;
-        }
-        app-card.center-card.place0 {
-            margin-left: #{- card-width($cards-size-percent) * 1.5 - 10}px;
-        }
-        app-card.center-card.place1 {
-            margin-left: #{- card-width($cards-size-percent) / 2}px;
-        }
-        app-card.center-card.place2 {
-            margin-left: #{card-width($cards-size-percent) / 2 + 10}px;
-        }
-    }
-
-    .numPlayers5 {
-        &.distributed {
-            app-card.player0 {
-                margin-top: #{- card-height($cards-size-percent) * 1.5}px;
-                margin-left: #{- card-width($cards-size-percent) * 3}px;
-            }
-            app-card.player1 {
-                margin-top: #{- card-height($cards-size-percent) * 1.5}px;
-                margin-left: #{card-width($cards-size-percent) * 2}px;
-            }
-            app-card.player2 {
-                margin-top: #{card-height($cards-size-percent) / 2}px;
-                margin-left: #{- card-width($cards-size-percent) * 3}px;
-            }
-            app-card.player3 {
-                margin-top: #{card-height($cards-size-percent) / 2 + 10}px;
-                margin-left: #{- card-width($cards-size-percent) / 2}px;
-            }
-            app-card.player4 {
-                margin-left: #{card-height($cards-size-percent) * 1.5}px;
-                margin-top: #{card-width($cards-size-percent) / 2}px;
-            }
-        }
-    }
+  }
 }
 
 app-card {
-    position: absolute;
-    display: block;
-    left: 50%;
-    // margin-left: #{- card-width($cards-size-percent) / 2}px;
-    top: 120%;
-    // margin-top: #{card-height($cards-size-percent)}px;
-    transition: transform $transition-duration linear 0s,
-        top $transition-duration linear 0s,
-        left $transition-duration linear 0s,
-        margin-top $transition-duration linear 0s,
-        margin-left $transition-duration linear 0s;
+  position: absolute;
+  display: block;
+  left: 50%;
+  // margin-left: #{- card-width($cards-size-percent) / 2}px;
+  top: 120%;
+  // margin-top: #{card-height($cards-size-percent)}px;
+  transition: transform $transition-duration linear 0s,
+  top $transition-duration linear 0s,
+  left $transition-duration linear 0s,
+  margin-top $transition-duration linear 0s,
+  margin-left $transition-duration linear 0s;
 }
 @for $i from 0 to 3 {
-    .distributing app-card.center-card.place#{$i} {
-        transition-delay: $i * $distribution-transition-delay-offset;
-    }
-    app-card.center-card.place#{$i} {
-        z-index: 150 + $i;
-    }
+  .distributing app-card.center-card.place#{$i} {
+    transition-delay: $i * $distribution-transition-delay-offset;
+  }
+  app-card.center-card.place#{$i} {
+    z-index: 150 + $i;
+  }
 }
 
 @for $i from 0 to 5 {
-    .distributing app-card.player#{$i} {
-        transition-delay: 3 * $distribution-transition-delay-offset + $i * $distribution-transition-delay-offset;
-    }
-    app-card.player#{$i} {
-        z-index: 153 + $i;
-    }
+  .distributing app-card.player#{$i} {
+    transition-delay: 3 * $distribution-transition-delay-offset + $i * $distribution-transition-delay-offset;
+  }
+  app-card.player#{$i} {
+    z-index: 153 + $i;
+  }
 }
 
 
 app-card /deep/ .card {
-    // @include card-size($cards-size-percent);
-    border: 2px solid transparent;
+  // @include card-size($cards-size-percent);
+  border: 2px solid transparent;
 }
 app-card.selected {
-    border: 1px solid $selection-color;
+  border: 1px solid $selection-color;
 }
 app-card.dragging {
-    opacity: 0.2;
-    z-index: 1000;
+  opacity: 0.2;
+  z-index: 1000;
 }
 app-card.moving {
-    z-index: 1000;
+  z-index: 1000;
 }
 app-card.over /deep/ .card {
-    border: 2px dotted $selection-color;
+  border: 2px dotted $selection-color;
 }
 app-card:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .disabled {
-    app-card:hover {
-        cursor: not-allowed;
-    }
+  app-card:hover {
+    cursor: not-allowed;
+  }
 }
 
 
 .distributed {
-    app-card.center-card {
-        top: 50%;
-        // margin-top: #{- card-height($cards-size-percent) / 2}px;
-    }
-    app-card.center-card.place0 {
-        left: 50%;
-        // margin-left: #{- card-width($cards-size-percent) * 1.5 - 10}px;
-    }
-    app-card.center-card.place1 {
-        left: 50%;
-        // margin-left: #{- card-width($cards-size-percent) / 2}px;
-    }
-    app-card.center-card.place2 {
-        left: 50%;
-        // margin-left: #{card-width($cards-size-percent) / 2 + 10}px;
-    }
+  app-card.center-card {
+    top: 50%;
+    // margin-top: #{- card-height($cards-size-percent) / 2}px;
+  }
+  app-card.center-card.place0 {
+    left: 50%;
+    // margin-left: #{- card-width($cards-size-percent) * 1.5 - 10}px;
+  }
+  app-card.center-card.place1 {
+    left: 50%;
+    // margin-left: #{- card-width($cards-size-percent) / 2}px;
+  }
+  app-card.center-card.place2 {
+    left: 50%;
+    // margin-left: #{card-width($cards-size-percent) / 2 + 10}px;
+  }
 }
 
 // TODO
 .numPlayers4 {
-    &.distributed {
-        app-card.player0 {
-            // bottom: #{card-height($cards-size-percent) / 2}px;
-            // right: #{card-width($cards-size-percent) * 2}px;
-            @include rotate(135deg);
-        }
-        app-card.player1 {
-            // bottom: #{card-height($cards-size-percent) / 2}px;
-            // left: #{card-width($cards-size-percent) * 2}px;
-            @include rotate(-135deg);
-        }
-        app-card.player2 {
-            // top: #{card-height($cards-size-percent) / 2}px;
-            // right: #{card-width($cards-size-percent) * 2}px;
-            @include rotate(45deg);
-        }
-        app-card.player3 {
-            // top: #{card-height($cards-size-percent) / 2}px;
-            // left: #{card-width($cards-size-percent) * 2}px;
-            @include rotate(-45deg);
-        }
+  &.distributed {
+    app-card.player0 {
+      // bottom: #{card-height($cards-size-percent) / 2}px;
+      // right: #{card-width($cards-size-percent) * 2}px;
+      @include rotate(135deg);
     }
+    app-card.player1 {
+      // bottom: #{card-height($cards-size-percent) / 2}px;
+      // left: #{card-width($cards-size-percent) * 2}px;
+      @include rotate(-135deg);
+    }
+    app-card.player2 {
+      // top: #{card-height($cards-size-percent) / 2}px;
+      // right: #{card-width($cards-size-percent) * 2}px;
+      @include rotate(45deg);
+    }
+    app-card.player3 {
+      // top: #{card-height($cards-size-percent) / 2}px;
+      // left: #{card-width($cards-size-percent) * 2}px;
+      @include rotate(-45deg);
+    }
+  }
 }
 
 
 .numPlayers5 {
-    &.distributed {
-        app-card.player0 {
-            top: 50%;
-            left: 50%;
-            // margin-top: #{- card-height($cards-size-percent) * 1.5}px;
-            // margin-left: #{- card-width($cards-size-percent) * 3}px;
-            @include rotate(135deg);
-        }
-        app-card.player1 {
-            top: 50%;
-            left: 50%;
-            // margin-top: #{- card-height($cards-size-percent) * 1.5}px;
-            // margin-left: #{card-width($cards-size-percent) * 2}px;
-            @include rotate(-135deg);
-        }
-        app-card.player2 {
-            top: 50%;
-            left: 50%;
-            // margin-top: #{card-height($cards-size-percent) / 2}px;
-            // margin-left: #{- card-width($cards-size-percent) * 3}px;
-            @include rotate(45deg);
-        }
-        app-card.player3 {
-            top: 50%;
-            left: 50%;
-            // margin-top: #{card-height($cards-size-percent) / 2 + 10}px;
-            // margin-left: #{- card-width($cards-size-percent) / 2}px;
-        }
-        app-card.player4 {
-            top: 50%;
-            left: 50%;
-            // margin-left: #{card-height($cards-size-percent) * 1.5}px;
-            // margin-top: #{card-width($cards-size-percent) / 2}px;
-            @include rotate(-45deg);
-        }
+  &.distributed {
+    app-card.player0 {
+      top: 50%;
+      left: 50%;
+      // margin-top: #{- card-height($cards-size-percent) * 1.5}px;
+      // margin-left: #{- card-width($cards-size-percent) * 3}px;
+      @include rotate(135deg);
     }
+    app-card.player1 {
+      top: 50%;
+      left: 50%;
+      // margin-top: #{- card-height($cards-size-percent) * 1.5}px;
+      // margin-left: #{card-width($cards-size-percent) * 2}px;
+      @include rotate(-135deg);
+    }
+    app-card.player2 {
+      top: 50%;
+      left: 50%;
+      // margin-top: #{card-height($cards-size-percent) / 2}px;
+      // margin-left: #{- card-width($cards-size-percent) * 3}px;
+      @include rotate(45deg);
+    }
+    app-card.player3 {
+      top: 50%;
+      left: 50%;
+      // margin-top: #{card-height($cards-size-percent) / 2 + 10}px;
+      // margin-left: #{- card-width($cards-size-percent) / 2}px;
+    }
+    app-card.player4 {
+      top: 50%;
+      left: 50%;
+      // margin-left: #{card-height($cards-size-percent) * 1.5}px;
+      // margin-top: #{card-width($cards-size-percent) / 2}px;
+      @include rotate(-45deg);
+    }
+  }
 }
 
 :host {
-    @include place-cards(50%);
+  @include place-cards(50%);
 }
 
 @media (max-width: 400px) {
-    :host {
-        @include place-cards(25%);
-    }    
+  :host {
+    @include place-cards(25%);
+  }    
 }

@@ -40,7 +40,7 @@ export class GamePage implements OnInit, OnDestroy {
   currentVotes: Vote[];
   voteResult: VoteResult;
   streams: PlayerVideoStream[] = [];
-  
+
   constructor(private gameService: GameService,
               private roleService: RoleService,
               private boardService: BoardService,
@@ -92,13 +92,13 @@ export class GamePage implements OnInit, OnDestroy {
     // TODO: stop video
     // TODO: close browser => stopCamera
     // this.nosleep.disable();
-    if(this.subscriptions) {
+    if (this.subscriptions) {
       this.subscriptions.forEach((s) => s.unsubscribe());
     }
-    if(this.timers) {
+    if (this.timers) {
       this.timers.forEach((t) => clearTimeout(t));
     }
-    if(this.sounds) {
+    if (this.sounds) {
       this.sounds.pause();
     }
   }
@@ -116,7 +116,7 @@ export class GamePage implements OnInit, OnDestroy {
     this.currentVotes = null;
     this.voteResult = null;
   }
-  
+
   distribute() {
     this.subscriptions.push(
       this.boardService.distribute(this.game)
@@ -144,20 +144,20 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   private updateBoard(board: Board) {
-    console.log("updateBoard", this.game.id, board);
+    console.log('updateBoard', this.game.id, board);
     this.board = board;
     this.currentRole = board.currentRole;
-    if(this.board.phase === Phase.SUNSET) {
+    if (this.board.phase === Phase.SUNSET) {
       this.everyoneCloseEyes();
-    } else if(this.board.phase === Phase.AWAKE) {
+    } else if (this.board.phase === Phase.AWAKE) {
       this.wakeUp(this.currentRole);
-    } else if(this.board.phase === Phase.SLEEPING) {
+    } else if (this.board.phase === Phase.SLEEPING) {
       this.closeEyes(this.currentRole);
-    } else if(this.board.phase === Phase.SUNRISE) {
+    } else if (this.board.phase === Phase.SUNRISE) {
       this.everyoneWakeUp();
-    } else if(this.board.phase === Phase.DISCUSS) {
+    } else if (this.board.phase === Phase.DISCUSS) {
       this.informRemainingTime();
-    } else if(this.board.phase === Phase.VOTE && !this.isGameEnded()) {
+    } else if (this.board.phase === Phase.VOTE && !this.isGameEnded()) {
       this.prepareToVote();
     }
   }
@@ -179,29 +179,29 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   private informRemainingTime() {
-    if(this.board.remainingDiscussionDuration === Duration.fromObject({minute: 1}).as('milliseconds')) {
+    if (this.board.remainingDiscussionDuration === Duration.fromObject({minute: 1}).as('milliseconds')) {
       this.playSound('1-minute-left');
     }
-    if(this.board.remainingDiscussionDuration === Duration.fromObject({seconds: 30}).as('milliseconds')) {
+    if (this.board.remainingDiscussionDuration === Duration.fromObject({seconds: 30}).as('milliseconds')) {
       this.playSound('30-seconds-left');
     }
   }
 
   private prepareToVote() {
-    if(this.board.remainingVoteDuration > Duration.fromObject({seconds: 3}).as('milliseconds')) {
+    if (this.board.remainingVoteDuration > Duration.fromObject({seconds: 3}).as('milliseconds')) {
       this.playSound(`prepare-to-vote`);
     }
-    if(this.board.remainingVoteDuration === Duration.fromObject({seconds: 3}).as('milliseconds')) {
+    if (this.board.remainingVoteDuration === Duration.fromObject({seconds: 3}).as('milliseconds')) {
       this.playSound(`vote-countdown`);
     }
   }
 
 
   private playSound(sound: string) {
-    if(!this.sounds) {
+    if (!this.sounds) {
       this.sounds = new Audio();
     }
-    if(this.sounds.src.indexOf(`assets/sounds/${sound}.mp3`) !== -1) {
+    if (this.sounds.src.indexOf(`assets/sounds/${sound}.mp3`) !== -1) {
       return;
     }
     this.sounds.src = `assets/sounds/${sound}.mp3`;
@@ -210,16 +210,16 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   isGameNotStarted() {
-    return this.board 
-            && this.board.distributed 
+    return this.board
+            && this.board.distributed
             && !this.board.started;
   }
 
   isNight() {
-    return this.board 
-            && this.board.distributed 
-            && this.board.started 
-            && this.board.phase !== Phase.DISCUSS 
+    return this.board
+            && this.board.distributed
+            && this.board.started
+            && this.board.phase !== Phase.DISCUSS
             && this.board.phase !== Phase.VOTE;
   }
 
@@ -260,10 +260,10 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   displayVoteTimer() {
-    return this.displayVotingBoard() 
+    return this.displayVotingBoard()
           && this.board.remainingVoteDuration <= Duration.fromObject({seconds: 3}).as('milliseconds')
           && this.board.remainingVoteDuration > 0;
-      ;
+
   }
 
   displayVoteMessage() {
@@ -286,7 +286,7 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   private updateVotes(votes: Vote[]) {
-    console.log("votes updated", votes);
+    console.log('votes updated', votes);
     this.currentVotes = votes;
     // once everyone has voted
     // then retrieve the deads and the winners

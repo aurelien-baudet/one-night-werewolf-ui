@@ -52,11 +52,11 @@ export class BoardComponent implements OnInit, OnChanges {
   }
 
   private distribute() {
-    if(!this.enableDistributionEffect) {
+    if (!this.enableDistributionEffect) {
       this.distributed = true;
     }
     // distribution effect
-    if(!this.distributed && !this.distributing && this.board.distributed && !this.board.ended) {
+    if (!this.distributed && !this.distributing && this.board.distributed && !this.board.ended) {
       this.distributing = true;
       setTimeout(() => this.distributed = true, 0);
       setTimeout(() => this.distributing = false, 500);
@@ -64,7 +64,7 @@ export class BoardComponent implements OnInit, OnChanges {
   }
 
   getCards() {
-    if(!this.board || !this.board.distributed) {
+    if (!this.board || !this.board.distributed) {
       return [];
     }
     return this.board.playerBoard.cards;
@@ -81,26 +81,26 @@ export class BoardComponent implements OnInit, OnChanges {
   getCardClass(card: Card) {
     let moving = {};
     // if there is a movement => take the class of the other card
-    if(this.cardMovement && this.cardMovement.sourceCard.id === card.id) {
+    if (this.cardMovement && this.cardMovement.sourceCard.id === card.id) {
       card = this.cardMovement.destinationCard;
-      moving = {'moving': true};
-    } else if(this.cardMovement && this.cardMovement.destinationCard.id === card.id) {
+      moving = {moving: true};
+    } else if (this.cardMovement && this.cardMovement.destinationCard.id === card.id) {
       card = this.cardMovement.sourceCard;
-      moving = {'moving': true};
+      moving = {moving: true};
     }
 
     // set the CSS classes to place cards on the board
-    if("place" in card.position) {
+    if ('place' in card.position) {
       return {
-        "center-card": true, 
-        ["place"+(card.position as InTheMiddle).place]: true,
+        'center-card': true,
+        ['place' + (card.position as InTheMiddle).place]: true,
         ...moving
       };
     }
-    if("playerId" in card.position) {
+    if ('playerId' in card.position) {
       return {
-        "player-card": true, 
-        ["player"+this.getPlayerIndex((card.position as InFrontOfPlayer).playerId)]: true,
+        'player-card': true,
+        ['player' + this.getPlayerIndex((card.position as InFrontOfPlayer).playerId)]: true,
         ...moving
       };
     }
@@ -112,7 +112,7 @@ export class BoardComponent implements OnInit, OnChanges {
   }
 
   toggleViewCard(card: Card) {
-    if(!(this.playerSelection.someSelection() && (this.canViewCard || this.canPlay))) {
+    if (!(this.playerSelection.someSelection() && (this.canViewCard || this.canPlay))) {
       return;
     }
     this.returnCard.emit({player: this.playerSelection.getSelection(), card});
@@ -120,35 +120,35 @@ export class BoardComponent implements OnInit, OnChanges {
 
   drag(event: DragEvent, card: Card) {
     this.cardMovement = null;
-    if(!this.isDragDropEnabled()) {
+    if (!this.isDragDropEnabled()) {
       return;
     }
     event.dataTransfer.dropEffect = 'move';
-    event.dataTransfer.setData("id", card.id);
+    event.dataTransfer.setData('id', card.id);
     this.draggingCardId = card.id;
   }
-  
+
   dragover(event: DragEvent, card: Card) {
     event.preventDefault();
-    if(!this.isDragDropEnabled()) {
+    if (!this.isDragDropEnabled()) {
       return;
     }
     this.overCardId = card.id;
   }
-  
+
   private isDragDropEnabled() {
     return this.canPlay && this.playerSelection.someSelection();
   }
 
   isOver(card: Card) {
-    if(!this.isDragDropEnabled()) {
+    if (!this.isDragDropEnabled()) {
       return false;
     }
     return this.overCardId === card.id;
   }
-  
+
   isDragging(card: Card) {
-    if(!this.isDragDropEnabled()) {
+    if (!this.isDragDropEnabled()) {
       return false;
     }
     return this.draggingCardId === card.id;
@@ -158,12 +158,12 @@ export class BoardComponent implements OnInit, OnChanges {
     event.preventDefault();
     this.overCardId = null;
     this.draggingCardId = null;
-    if(!this.isDragDropEnabled()) {
+    if (!this.isDragDropEnabled()) {
       return;
     }
     const sourceCard = this.board.playerBoard.cards
       .find((c) => c.id === event.dataTransfer.getData('id'));
-    if(sourceCard.id === destinationCard.id) {
+    if (sourceCard.id === destinationCard.id) {
       return;
     }
     // visually move the cards
@@ -176,21 +176,21 @@ export class BoardComponent implements OnInit, OnChanges {
 
 
   isDead(player: Player) {
-    if(!this.deadPlayers) {
+    if (!this.deadPlayers) {
       return false;
     }
     return this.deadPlayers.find((p) => p.id === player.id);
   }
 
   isWinner(player: Player) {
-    if(!this.winners) {
+    if (!this.winners) {
       return false;
     }
     return this.winners.find((p) => p.id === player.id);
   }
 
   isLooser(player: Player) {
-    if(!this.loosers) {
+    if (!this.loosers) {
       return false;
     }
     return this.loosers.find((p) => p.id === player.id);

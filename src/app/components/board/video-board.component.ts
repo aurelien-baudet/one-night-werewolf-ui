@@ -25,7 +25,7 @@ export class VideoBoardComponent {
   getPlayerClass(idx: number) {
     return BoardUtils.getPlayerClass(idx);
   }
- 
+
   getPlayerIdx(player: PlayerRef) {
     return this.players.findIndex((p) => p.id === player.id);
   }

@@ -35,21 +35,4 @@ export class RestGameService implements GameService {
   public listGames(): Observable<Game[]> {
     return this.http.get<Game[]>(`${this.backendConfig.url}/games`);
   }
-
-  // private async copyGame(game: Game): Promise<Game> {
-  //   const currentStreamsMetadatas = await this.videoService.getStreams(game).pipe(first()).toPromise();
-  //   const newGame = await this.newGame(game.selectedRoles, game.options).pipe(first()).toPromise();
-  //   const uuid = await this.uuidService.get().pipe(first()).toPromise();
-  //   for(const player of game.players) {
-  //     const newPlayer = await this.playerService.addPlayer(newGame, player).pipe(first()).toPromise();
-  //     if(this.wasPlayerPlayingOnThisDevice(currentStreamsMetadatas, uuid, player)) {
-  //       await this.videoService.streamVideo(newGame, uuid, newPlayer).pipe(first()).toPromise();
-  //     }
-  //   }
-  //   return this.getGame(newGame.id).pipe(first()).toPromise();
-  // }
-
-  // private wasPlayerPlayingOnThisDevice(currentStreamsMetadatas: PlayerVideoStream[], uuid: string, player: PlayerRef): boolean {
-  //   return currentStreamsMetadatas.some(m => m.player.id === player.id && m.group === uuid);
-  // }
 }

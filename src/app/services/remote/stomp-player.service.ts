@@ -17,28 +17,12 @@ export class StompPlayerService implements PlayerService {
               private stomHelper: StompHelper) { }
 
   public getPlayers(game: GameRef): Observable<Player[]> {
-    // const obs = this.rxStompService.watch(`/topic/games/${game.id}/players`).pipe(
-    //   map((m) => JSON.parse(m.body))
-    // );
-    // this.rxStompService.publish({
-    //   destination: `/app/games/${game.id}/players`
-    // });
-    // return obs;
     return this.stomHelper.watchAndPublish(`games/${game.id}/players`).pipe(
       map((m) => JSON.parse(m.body))
     );
   }
 
   public addPlayer(game: GameRef, player: NewPlayer): Observable<Player> {
-    // const obs = this.rxStompService.watch(`/topic/games/${game.id}/players/add`).pipe(
-    //   map((m) => JSON.parse(m.body))
-    // );
-    // const subscription = obs.subscribe(() => subscription.unsubscribe());
-    // this.rxStompService.publish({
-    //   destination: `/app/games/${game.id}/players/add`,
-    //   body: JSON.stringify(player)
-    // });
-    // return obs;
     return this.stomHelper.watchAndPublish(`games/${game.id}/players/add`, {
       body: JSON.stringify(player)
     }).pipe(
@@ -48,14 +32,6 @@ export class StompPlayerService implements PlayerService {
   }
 
   public removePlayer(game: GameRef, player: PlayerRef): Observable<void> {
-    // const obs = this.rxStompService.watch(`/topic/games/${game.id}/players/${player.id}/remove`).pipe(
-    //   mapTo(null)
-    // );
-    // const subscription = obs.subscribe(() => subscription.unsubscribe());
-    // this.rxStompService.publish({
-    //   destination: `/app/games/${game.id}/players/${player.id}/remove`
-    // });
-    // return obs;
     return this.stomHelper.watchAndPublish(`games/${game.id}/players/${player.id}/remove`).pipe(
       first(),
       mapTo(null)

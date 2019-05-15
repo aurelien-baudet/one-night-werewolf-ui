@@ -1,46 +1,46 @@
 @import "../../../mixins";
 
 .night-progress {
-    background: black;
+  background: black;
 }
 ul {
-    text-align: center;
+  text-align: center;
 }
 
 ul, li {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 li {
-    display: inline-block;
-    margin: 5px;
-    border: 2px solid transparent;
-    opacity: 0.4;
-
-    &.selected {
-        border-color: green;
-    }
+  display: inline-block;
+  margin: 5px;
+  border: 2px solid transparent;
+  opacity: 0.4;
+  
+  &.selected {
+    border-color: green;
+  }
 }
 li /deep/ app-card {
-    .card {
-        @include card-size(35%);
-    }
+  .card {
+    @include card-size(35%);
+  }
 }
 
 li.current {
-    opacity: 1;
+  opacity: 1;
 }
 
 
 @media (max-width: 400px) {
-    li {
-        margin: 2px;
+  li {
+    margin: 2px;
+  }
+  li /deep/ app-card {
+    .card {
+      @include card-size(18%);
     }
-    li /deep/ app-card {
-        .card {
-            @include card-size(18%);
-        }
-    }
+  }
 }

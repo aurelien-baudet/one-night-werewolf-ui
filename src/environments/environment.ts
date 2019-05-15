@@ -21,11 +21,11 @@ let openViduPort = '4443';
 let serverPath = '';
 let openviduPath = '';
 
-if(exposed) {
+if (exposed) {
   serverHost = '192.168.0.22';
 }
 
-if(exposed && secured) {
+if (exposed && secured) {
   serverHost = 'werewolf.localdomain.com';
   serverPort = '443';
   openViduPort = '443';

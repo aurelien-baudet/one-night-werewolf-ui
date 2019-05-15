@@ -1,5 +1,5 @@
 
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs';
 
 export const consoleLogger = (message: string) =>
   <T>(source: Observable<T>) =>
@@ -19,6 +19,6 @@ export const consoleLogger = (message: string) =>
           console.debug(message.concat(' Completed.'));
           observer.complete();
         }
-      }))
+      }));
 
 export const debug = consoleLogger;

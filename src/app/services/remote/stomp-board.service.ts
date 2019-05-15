@@ -14,81 +14,81 @@ import { StompHelper } from './stomp-helper';
 
 
 interface ServerCardsSwitched {
-    card1Id: string;
-    card2Id: string;
+  card1Id: string;
+  card2Id: string;
 }
 
 interface ServerPlayerBoard {
-    playerId: string;
-    originalRole: Role;
-    cards: Card[];
-    movements: ServerCardsSwitched[];
+  playerId: string;
+  originalRole: Role;
+  cards: Card[];
+  movements: ServerCardsSwitched[];
 }
 
 interface ServerBoard {
-	remainingDiscussionDuration: number;
-	remainingVoteDuration: number;
-	currentRole: Role;
-    distributed: boolean;
-    started: boolean;
-    ended: boolean;
-    phase: string;
-    boardsPerPlayerId: Map<string, ServerPlayerBoard>;
-    allPlayerBoards: ServerPlayerBoard[];
+  remainingDiscussionDuration: number;
+  remainingVoteDuration: number;
+  currentRole: Role;
+  distributed: boolean;
+  started: boolean;
+  ended: boolean;
+  phase: string;
+  boardsPerPlayerId: Map<string, ServerPlayerBoard>;
+  allPlayerBoards: ServerPlayerBoard[];
 }
 
 
 @Injectable()
 export class StompBoardService implements BoardService {
-    constructor(private rxStompService: RxStompService,
-                private stompHelper: StompHelper) {}
+  constructor(private rxStompService: RxStompService,
+              private stompHelper: StompHelper) {}
 
-    public getBoard(game: GameRef, player: PlayerRef): Observable<Board> {
-        return this.stompHelper.watchAndPublish(`games/${game.id}/board`).pipe(
-            map((m) => JSON.parse(m.body)),
-            map((board) => this.filterBoardForPlayer(board, player.id))
-        );
-    }
+  public getBoard(game: GameRef, player: PlayerRef): Observable<Board> {
+    return this.stompHelper.watchAndPublish(`games/${game.id}/board`).pipe(
+      map((m) => JSON.parse(m.body)),
+      map((board) => this.filterBoardForPlayer(board, player.id))
+    );
+  }
 
-    public execute(game: GameRef, player: PlayerRef, action: Action): Observable<any> {
-        return this.stompHelper.publishWithReceipt(`games/${game.id}/players/${player.id}/play`, {
-            body: JSON.stringify(action)
-        });
-    }
+  public execute(game: GameRef, player: PlayerRef, action: Action): Observable<any> {
+    return this.stompHelper.publishWithReceipt(`games/${game.id}/players/${player.id}/play`, {
+      body: JSON.stringify(action)
+    });
+  }
 
-    public distribute(game: GameRef): Observable<any> {
-        return this.stompHelper.watchAndPublish(`games/${game.id}/distribute`).pipe(
-            first()
-        );
-    }
+  public distribute(game: GameRef): Observable<any> {
+    return this.stompHelper.watchAndPublish(`games/${game.id}/distribute`).pipe(
+      first()
+    );
+  }
 
-    public startGame(game: GameRef): Observable<any> {
-        return this.stompHelper.watchAndPublish(`games/${game.id}/start`).pipe(
-            first()
-        );
-    }
+  public startGame(game: GameRef): Observable<any> {
+    return this.stompHelper.watchAndPublish(`games/${game.id}/start`).pipe(
+      first()
+    );
+  }
 
-    public gameRestarted(game: GameRef): Observable<any> {
-        return this.rxStompService.watch(`/topic/games/${game.id}/restarted`);
-    }
+  public gameRestarted(game: GameRef): Observable<any> {
+    return this.rxStompService.watch(`/topic/games/${game.id}/restarted`);
+  }
 
-    private filterBoardForPlayer(board: ServerBoard, playerId: string): Board {
-        return new Board(board.remainingDiscussionDuration, 
-            board.remainingVoteDuration, 
-            board.currentRole, 
-            playerId 
-                ? this.mapPlayerBoard(board.boardsPerPlayerId[playerId])
-                : this.mapPlayerBoard(board.allPlayerBoards[0], true), 
-            board.distributed,
-            board.started,
-            board.ended,
-            Phase[board.phase as keyof typeof Phase]);
-    }
+  private filterBoardForPlayer(board: ServerBoard, playerId: string): Board {
+    return new Board(board.remainingDiscussionDuration,
+      board.remainingVoteDuration,
+      board.currentRole,
+      playerId
+        ? this.mapPlayerBoard(board.boardsPerPlayerId[playerId])
+        : this.mapPlayerBoard(board.allPlayerBoards[0], true),
+      board.distributed,
+      board.started,
+      board.ended,
+      Phase[board.phase as keyof typeof Phase]);
+  }
 
-    private mapPlayerBoard(raw: ServerPlayerBoard, hideCards = false) {
-        if(hideCards) {
-            raw.cards.forEach((c) => c.visible = false);
-        }
-        return new PlayerBoard(raw.playerId, raw.originalRole, raw.cards, raw.movements);
+  private mapPlayerBoard(raw: ServerPlayerBoard, hideCards = false) {
+    if (hideCards) {
+      raw.cards.forEach((c) => c.visible = false);
     }
+    return new PlayerBoard(raw.playerId, raw.originalRole, raw.cards, raw.movements);
+  }
 }

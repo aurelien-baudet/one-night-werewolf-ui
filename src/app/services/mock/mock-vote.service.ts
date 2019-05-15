@@ -10,15 +10,15 @@ export class MockVoteService implements VoteService {
 
     public getVotes(game: GameRef): Observable<Vote[]> {
         return of([
-            new Vote("1", "2"),
-            new Vote("2", "1"),
-            new Vote("3", "2"),
-            new Vote("4", "1")
+            new Vote('1', '2'),
+            new Vote('2', '1'),
+            new Vote('3', '2'),
+            new Vote('4', '1')
         ]);
     }
 
     public vote(game: GameRef, voter: PlayerRef, against: PlayerRef): Observable<Vote> {
-        return of(new Vote("1", "2"));
+        return of(new Vote('1', '2'));
     }
 
     public hasEveryoneVoted(game: GameRef): Observable<boolean> {
@@ -26,7 +26,7 @@ export class MockVoteService implements VoteService {
     }
 
     public getWinners(game: GameRef): Observable<VoteResult> {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
 
 }

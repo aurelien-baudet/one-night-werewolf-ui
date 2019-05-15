@@ -2,90 +2,90 @@
 @import "common";
 
 .vote-token {
-    display: block;
-    width: 48px;
-    height: 48px;
-    margin: 5px;
-    background: url('../../../assets/vote/vote-48x48.png') center center no-repeat;
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 5px;
+  background: url('../../../assets/vote/vote-48x48.png') center center no-repeat;
 }
 .vote-token.voted {
-    background: url('../../../assets/vote/voted-48x48.png') center center no-repeat;
+  background: url('../../../assets/vote/voted-48x48.png') center center no-repeat;
 }
 .vote-token.cdk-drag-preview {
-    background: url('../../../assets/vote/voting-48x48.png') center center no-repeat;
+  background: url('../../../assets/vote/voting-48x48.png') center center no-repeat;
 }
 .vote-token .voter-name {
-    display: none;
+  display: none;
 }
 
 @for $i from 0 to 5 {
-    .vote-token.player#{$i} {
-        filter: opacity(.5) drop-shadow(0 0 0 player-color($i + 1))
-    }
+  .vote-token.player#{$i} {
+    filter: opacity(.5) drop-shadow(0 0 0 player-color($i + 1))
+  }
 }
 
 .votes-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: wrap-reverse;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
 }
 
 
 .numPlayers4 {
-    // TOOD
+  // TOOD
 }
 
 
 .numPlayers5 {
-     .player.player0 {
-        .votes-container {
-            justify-content: flex-end;
-            align-items: flex-start;
-        }
+  .player.player0 {
+    .votes-container {
+      justify-content: flex-end;
+      align-items: flex-start;
     }
-    .player.player1 {
-        .votes-container {
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
+  }
+  .player.player1 {
+    .votes-container {
+      justify-content: flex-start;
+      align-items: flex-start;
     }
-    .player.player2 {
-        .votes-container {
-            justify-content: flex-end;
-            align-items: flex-end;
-        }
+  }
+  .player.player2 {
+    .votes-container {
+      justify-content: flex-end;
+      align-items: flex-end;
     }
-    .player.player3 {
-        .votes-container {
-            justify-content: center;
-            align-items: flex-end;
-        }
+  }
+  .player.player3 {
+    .votes-container {
+      justify-content: center;
+      align-items: flex-end;
     }
-    .player.player4 {
-        .votes-container {
-            justify-content: flex-start;
-            align-items: flex-end;
-        }
+  }
+  .player.player4 {
+    .votes-container {
+      justify-content: flex-start;
+      align-items: flex-end;
     }
+  }
 }
 
 
 @media (max-width: 400px) {
-    .vote-token {
-        width: 24px;
-        height: 24px;
-        margin: 5px 2px;
-
-        &,
-        &.voted,
-        &.cdk-drag-preview {
-            background-size: 24px 24px;
-        }
+  .vote-token {
+    width: 24px;
+    height: 24px;
+    margin: 5px 2px;
+    
+    &,
+    &.voted,
+    &.cdk-drag-preview {
+      background-size: 24px 24px;
     }
+  }
 }

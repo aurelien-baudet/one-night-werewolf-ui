@@ -15,12 +15,12 @@ export class MockBoardService implements BoardService {
             3000,
             2000,
             null,
-            new PlayerBoard("1", new Role('seer', ''), this.getCards(), []),
+            new PlayerBoard('1', new Role('seer', ''), this.getCards(), []),
             true,
             false,
             false,
             null
-        ))
+        ));
     }
     public startGame(game: GameRef): Observable<any> {
         return of();
@@ -45,12 +45,12 @@ export class MockBoardService implements BoardService {
             3000,
             2000,
             new Role('werewolf', ''),
-            new PlayerBoard("1", new Role('seer', ''), this.getCards(), []),
+            new PlayerBoard('1', new Role('seer', ''), this.getCards(), []),
             true,
             true,
             false,
             Phase.AWAKE
-        ))
+        ));
         // // SUNRISE
         // return of(new Board(
         //     3000,
@@ -105,12 +105,12 @@ export class MockBoardService implements BoardService {
         return [
             new Card('werewolf1', new Role('werewolf', ''), false, new InTheMiddle(0)),
             new Card('werewolf2', new Role('werewolf', ''), false, new InTheMiddle(2)),
-            new Card('seer', new Role('seer', ''), false, new InFrontOfPlayer("1")),
-            new Card('troublemaker', new Role('troublemaker', ''), false, new InFrontOfPlayer("5")),
+            new Card('seer', new Role('seer', ''), false, new InFrontOfPlayer('1')),
+            new Card('troublemaker', new Role('troublemaker', ''), false, new InFrontOfPlayer('5')),
             new Card('robber', new Role('robber', ''), false, new InTheMiddle(1)),
-            new Card('drunk', new Role('drunk', ''), false, new InFrontOfPlayer("3")),
-            new Card('tanner', new Role('tanner', ''), false, new InFrontOfPlayer("4")),
-            new Card('insomniac', new Role('insomniac', ''), false, new InFrontOfPlayer("2")),
-        ]
+            new Card('drunk', new Role('drunk', ''), false, new InFrontOfPlayer('3')),
+            new Card('tanner', new Role('tanner', ''), false, new InFrontOfPlayer('4')),
+            new Card('insomniac', new Role('insomniac', ''), false, new InFrontOfPlayer('2')),
+        ];
     }
 }

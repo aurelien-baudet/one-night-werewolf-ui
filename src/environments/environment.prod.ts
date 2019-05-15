@@ -6,13 +6,16 @@ import { RestGameService } from 'src/app/services/remote/rest-game.service';
 import { PlayerService } from 'src/app/services/player.service';
 import { StompPlayerService } from 'src/app/services/remote/stomp-player.service';
 
-const serverHost = 'localhost';
-const serverPort = '8080';
-const openViduPort = '4443';
+const serverHost = 'test.onenightwerewolf.ovh';
+const serverPort = '443';
+const serverPath = '/backend';
+const websocketPath = '/ws';
+const openViduPort = '443';
+const openviduPath = '/openvidu';
 
 const rxStompConfig: InjectableRxStompConfig = {
   // Which server?
-  brokerURL: `ws://${serverHost}:${serverPort}/ws`,
+  brokerURL: `wss://${serverHost}:${serverPort}${websocketPath}`,
 
   // Headers
   // Typical keys: login, passcode, host
@@ -34,19 +37,17 @@ const rxStompConfig: InjectableRxStompConfig = {
   // Will log diagnostics on console
   // It can be quite verbose, not recommended in production
   // Skip this key to stop logging to console
-  debug: (msg: string): void => {
-    console.debug(new Date(), msg);
-  }
+  // debug: (msg: string): void => {}
 };
 
 export const environment = {
   production: true,
   mock: false,
   backend: {
-    url: `http://${serverHost}:${serverPort}`
+    url: `https://${serverHost}:${serverPort}${serverPath}`
   },
   openVidu: {
-    serverUrl: `https://${serverHost}:${openViduPort}`
+    serverUrl: `https://${serverHost}:${openViduPort}${openviduPath}`
   },
   rxStompConfig
 };

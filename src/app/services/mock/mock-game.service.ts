@@ -25,25 +25,25 @@ export class MockGameService implements GameService {
   public getGame(gameId: string): Observable<Game> {
     let game = this.games.get(gameId);
     // just a mocked game to avoid creating it every time
-    if(!game) {
+    if (!game) {
       game = new Game(gameId, [
-        new Role("werewolf", ""),
-        new Role("werewolf", ""),
-        new Role("seer", ""),
-        new Role("robber", ""),
-        new Role("troublemaker", ""),
-        new Role("drunk", ""),
-        new Role("hunter", ""),
-        new Role("insomniac", "")],
+        new Role('werewolf', ''),
+        new Role('werewolf', ''),
+        new Role('seer', ''),
+        new Role('robber', ''),
+        new Role('troublemaker', ''),
+        new Role('drunk', ''),
+        new Role('hunter', ''),
+        new Role('insomniac', '')],
         null);
     }
-    if(!game.players) {
+    if (!game.players) {
       game.players = [
-        new Player("1", "Yo"),
-        new Player("2", "Cécé"),
-        new Player("3", "Guigui"),
-        new Player("4", "Roma"),
-        new Player("5", "Moi")
+        new Player('1', 'Yo'),
+        new Player('2', 'Cécé'),
+        new Player('3', 'Guigui'),
+        new Player('4', 'Roma'),
+        new Player('5', 'Moi')
       ];
     }
     return of(game);

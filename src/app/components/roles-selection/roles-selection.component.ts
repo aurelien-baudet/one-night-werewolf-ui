@@ -17,7 +17,7 @@ export class RolesSelectionComponent {
 
   toggleRoleSelection(index: number) {
     const idx = this.selectedRoles.indexOf(index);
-    if(idx === -1) {
+    if (idx === -1) {
       this.selectedRoles.push(index);
     } else {
       this.selectedRoles.splice(idx, 1);

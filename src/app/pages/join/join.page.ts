@@ -66,11 +66,11 @@ export class JoinPage implements OnInit, OnDestroy {
     this.players = players;
     let i = 0;
     // add players that are ready
-    for( ; i < Math.min(this.players.length, this.numPlayers) ; i++) {
+    for ( ; i < Math.min(this.players.length, this.numPlayers) ; i++) {
       this.uiPlayers[i] = new JoinedPlayer(this.players[i]);
     }
     // add empty players to show waiting
-    for( ; i < this.numPlayers ; i++) {
+    for ( ; i < this.numPlayers ; i++) {
       this.uiPlayers[i] = new WaitingPlayer();
     }
   }
@@ -98,7 +98,7 @@ export class JoinPage implements OnInit, OnDestroy {
   }
 
   startIfReady(): void {
-    if(this.numPlayers > 0 && this.isEverybodyReady()) {
+    if (this.numPlayers > 0 && this.isEverybodyReady()) {
       clearInterval(this.readyTimer);
       this.router.navigate(['games', this.gameId, 'play']);
     }
@@ -127,7 +127,7 @@ export class JoinPage implements OnInit, OnDestroy {
   getPlayerClass(idx: number) {
     return BoardUtils.getPlayerClass(idx);
   }
-  
+
   ngOnDestroy(): void {
     clearInterval(this.readyTimer);
     this.playersSubsciption.unsubscribe();

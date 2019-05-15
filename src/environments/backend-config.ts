@@ -1,11 +1,11 @@
 import { InjectionToken } from '@angular/core';
 
 export interface BackendConfig {
-    url: string;
+  url: string;
 }
 
 export interface OpenViduConfig {
-    serverUrl: string;
+  serverUrl: string;
 }
 
 export const BackendConfigToken = new InjectionToken<BackendConfig>('backendConfig');
