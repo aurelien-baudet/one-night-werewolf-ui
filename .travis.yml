@@ -1,7 +1,21 @@
 language: node_js
 cache: npm
+
 before_install:
-  - npm i -g npm@6.4.1
-  - npm install -g @angular/cli
+- npm i -g npm@6.4.1
+- npm install -g @angular/cli
 script:
-  - ng build --prod
+- ng build --prod
+
+before_deploy:
+- rm -f dist/one-night-werewolf-ui.tar.gz
+- tar czf dist/one-night-werewolf-ui.tar.gz dist/werewolf-ui
+deploy:
+  provider: releases
+  api_key:
+    secure: W7b7QWsDcDVP+GVRyfMcqJ6iwQipVHflNBZd6LDnovHrKLcUDb14m1NjE/qXqLCng/h7iFRXqAEgdH9GgN84BI38nAO9ecT+khiTBnL2Z758k24mLHGJf9dTm+fLgatIzwlXio61CU0o4Wz1fMjZ7oConyfKmkgJWwyAOpcfupfo9ha2YJYQeDzWkkxMRlCxizAaxJJmONy4ocV/6FjJPULjCz6IdBhhWqMNa8ua/MDGAYPpdthAl8Ki4MWMLCMRTcXRjVLX6VYgUW6SFmfLhpk4oSb8gF8nem8rACrglbt6gDlaWefwU+03mHUSHKsvVhlyRzFpY8BGsPftAbMiEgt4iV7Adhb+QxavzB5QzVlp+sEICnLW4v5KwcmtGTmwheIEeuceByiKx9Ip/uBmO1gRkFMRQ3mNJ5qM7Rf6e0Zo29I5sJoe635qBzwDYdT6yY0u9N/ofkMjWNanXbHz5nmU2TN9geGqIpSG4tBY9UNVaukzNLEnaW0wCR5lH31rqx5RE5fC5wlmUUDvDZelx8wIKy8f3fwyTAZGrns5RUJhgYrZa7fTL2y078axeRy+JU3JtKFScyXR8WTAlzN+lIWGhumib5eL0sCy4CnVYpZliENXYPLa4ET1UdNVTFpCFDoI9gptgFKGqAJDSHCTYEYh8o0eAR49YoleKL7wALI=
+  file: dist/one-night-werewolf-ui.tar.gz
+  skip_cleanup: true
+  draft: true
+  on:
+    repo: aurelien-baudet/one-night-werewolf-ui
