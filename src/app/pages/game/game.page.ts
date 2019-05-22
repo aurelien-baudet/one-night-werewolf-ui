@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChild, ViewChild, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, ContentChild, ViewChild, OnDestroy, HostListener, Renderer2 } from '@angular/core';
 import { Role } from 'src/app/domain/Role';
 import { RoleService } from 'src/app/services/role.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -49,10 +49,12 @@ export class GamePage implements OnInit, OnDestroy {
               private uuidService: UuidService,
               private videoService: VideoService,
               private route: ActivatedRoute,
-              private router: Router/*,
+              private router: Router,
+              private renderer: Renderer2/*,
               private nosleep: NoSleep*/) { }
 
   async ngOnInit() {
+    this.renderer.addClass(document.body, 'game-page');
     const gameId = this.route.snapshot.paramMap.get('id');
     this.game = await this.gameService.getGame(gameId).toPromise();
     this.players = this.game.players;
@@ -74,6 +76,7 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.renderer.removeClass(document.body, 'game-page');
     this.cleanAndStopVideo();
   }
 

@@ -22,6 +22,10 @@ app-root {
   padding: 5px;
 }
 
+body.game-page {
+  overflow: hidden;
+}
+
 button {
     font-size: 1.2em;
     font-weight: bold;

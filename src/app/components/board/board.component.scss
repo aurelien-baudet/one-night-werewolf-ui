@@ -28,6 +28,7 @@ $distribution-transition-delay-offset: 0.2s;
     }
   }
   
+  .numPlayers4,
   .numPlayers5 {
     &.distributed {
       app-card.player0 {
@@ -43,12 +44,12 @@ $distribution-transition-delay-offset: 0.2s;
         margin-left: #{- card-width($cards-size-percent) * 3}px;
       }
       app-card.player3 {
-        margin-top: #{card-height($cards-size-percent) / 2 + 10}px;
-        margin-left: #{- card-width($cards-size-percent) / 2}px;
-      }
-      app-card.player4 {
         margin-left: #{card-height($cards-size-percent) * 1.5}px;
         margin-top: #{card-width($cards-size-percent) / 2}px;
+      }
+      app-card.player4 {
+        margin-top: #{card-height($cards-size-percent) / 2 + 10}px;
+        margin-left: #{- card-width($cards-size-percent) / 2}px;
       }
     }
   }
@@ -116,36 +117,16 @@ app-card:hover {
   app-card.center-card {
     top: 50%;
   }
-  app-card.center-card.place0 {
-    left: 50%;
-  }
-  app-card.center-card.place1 {
-    left: 50%;
-  }
+  app-card.center-card.place0,
+  app-card.center-card.place1,
   app-card.center-card.place2 {
     left: 50%;
   }
 }
 
-// TODO
-.numPlayers4 {
-  &.distributed {
-    app-card.player0 {
-      @include rotate(135deg);
-    }
-    app-card.player1 {
-      @include rotate(-135deg);
-    }
-    app-card.player2 {
-      @include rotate(45deg);
-    }
-    app-card.player3 {
-      @include rotate(-45deg);
-    }
-  }
-}
 
 
+.numPlayers4,
 .numPlayers5 {
   &.distributed {
     app-card.player0 {
@@ -166,11 +147,11 @@ app-card:hover {
     app-card.player3 {
       top: 50%;
       left: 50%;
+      @include rotate(-45deg);
     }
     app-card.player4 {
       top: 50%;
       left: 50%;
-      @include rotate(-45deg);
     }
   }
 }
