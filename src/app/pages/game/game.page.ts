@@ -319,6 +319,11 @@ export class GamePage implements OnInit, OnDestroy {
     this.voteService.vote(this.game, voter, against);
   }
 
+  home() {
+    // TODO: stop video and remove player(s) ?
+    this.router.navigate(['games']);
+  }
+
   private updateVotes(votes: Vote[]) {
     console.log('votes updated', votes);
     this.currentVotes = votes;

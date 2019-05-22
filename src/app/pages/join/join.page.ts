@@ -144,4 +144,9 @@ export class JoinPage implements OnInit, OnDestroy {
             .pipe(first())
             .toPromise();
   }
+
+  home() {
+    // TODO: stop video and remove player(s) ?
+    this.router.navigate(['games']);
+  }
 }

@@ -67,4 +67,8 @@ export class PrepareGamePage implements OnInit {
   inc(field: string, inc: number) {
     this.options[field] = Math.min(this.options[field+'Max'], Math.max(this.options[field+'Min'], this.options[field] + inc));
   }
+
+  home() {
+    this.router.navigate(['games']);
+  }
 }

@@ -18,6 +18,6 @@ docker run -p 4443:4443 --rm -e openvidu.secret=MY_SECRET -e openvidu.publicurl=
   - proposer de recommencer une partie avec les mêmes options
   - proposer de changer les options
 - [P2] Retourner à la liste des parties à tout moment
-
+- [P3] Gérer la déconnexion correctement (fin de partie plutôt que lorsqu'on quitte la page ?)
 
 

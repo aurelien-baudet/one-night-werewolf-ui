@@ -1,3 +1,4 @@
+<button class="home" (click)="home()">home</button>
 <form #addForm="ngForm" (submit)="addPlayer(newPlayer); addForm.reset()">
   <p>Ajouter chaque joueur qui jouera sur cet appareil</p>
   <p *ngIf="!isEverybodyReady()">
