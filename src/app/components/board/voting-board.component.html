@@ -3,24 +3,26 @@
     [ngClass]="getPlayerClass(idx)"
     [class.dead]="isDead(player)">
     <app-player [player]="player"></app-player>
-    <div class="votes-container"
+    <div class="drop-container"
       cdkDropList
       [cdkDropListData]="getVotesAgainstPlayer(player)" 
       (cdkDropListDropped)="drop($event, player)"
       [cdkDropListEnterPredicate]="canVote">
-      <div class="vote-token"
-        *ngIf="!hasVoted(player)"
-        [ngClass]="getPlayerClass(idx)"
-        cdkDrag
-        [cdkDragData]="player">
-        <span class="voter-name">{{ player.name }}</span>
-      </div>
-      <div class="vote-token voted"
-        *ngFor="let voter of getVotesAgainstPlayer(player)"
-        [ngClass]="getPlayerClass(getPlayerIdx(voter))"
-        cdkDrag
-        [cdkDragData]="voter">
-        <span class="voter-name">{{ voter.name }}</span>
+      <div class="votes-container">
+        <div class="vote-token"
+          *ngIf="!hasVoted(player)"
+          [ngClass]="getPlayerClass(idx)"
+          cdkDrag
+          [cdkDragData]="player">
+          <span class="voter-name">{{ player.name }}</span>
+        </div>
+        <div class="vote-token voted"
+          *ngFor="let voter of getVotesAgainstPlayer(player)"
+          [ngClass]="getPlayerClass(getPlayerIdx(voter))"
+          cdkDrag
+          [cdkDragData]="voter">
+          <span class="voter-name">{{ voter.name }}</span>
+        </div>
       </div>
     </div>
   </div>
