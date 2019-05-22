@@ -89,13 +89,16 @@ export class GamePage implements OnInit, OnDestroy {
             .toPromise();
   }
 
+  private unsubscribe() {
+    if (this.subscriptions) {
+      this.subscriptions.forEach((s) => s.unsubscribe());
+    }
+  }
+
   private clean() {
     // TODO: stop video
     // TODO: close browser => stopCamera
     // this.nosleep.disable();
-    if (this.subscriptions) {
-      this.subscriptions.forEach((s) => s.unsubscribe());
-    }
     if (this.timers) {
       this.timers.forEach((t) => clearTimeout(t));
     }
@@ -107,6 +110,7 @@ export class GamePage implements OnInit, OnDestroy {
 
   private async reset() {
     this.clean();
+    this.unsubscribe();
     this.game = null;
     this.currentRole = null;
     this.board = null;
@@ -134,6 +138,8 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   restart() {
+    this.clean();
+    // board will be updated
     this.subscriptions.push(
       this.gameService.replayGame(this.game)
         .subscribe()
@@ -265,7 +271,7 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   displayBoard() {
-    return this.board && (this.board.phase !== Phase.VOTE || this.displayGameResult());
+    return !this.board || this.board.phase !== Phase.VOTE || this.displayGameResult();
   }
 
   displayGameResult() {

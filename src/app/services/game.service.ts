@@ -9,4 +9,6 @@ export abstract class GameService {
 
   public abstract getGame(gameId: string): Observable<Game>;
   public abstract listGames(): Observable<Game[]>;
+
+  public abstract listBackgroundMusics(): Observable<string[]>;
 }

@@ -1,5 +1,43 @@
-<app-roles-selection 
-    [availableRoles]="availableRoles" 
-    (roleSelectionChange)="updateSelectedRoles($event)"></app-roles-selection>
-<div class="duration"></div>
-<button (click)="createGame()">créer une partie</button>
+<form #gameForm="ngForm" (ngSubmit)="createGame()">
+  <app-roles-selection 
+      [availableRoles]="availableRoles" 
+      (roleSelectionChange)="updateSelectedRoles($event)"></app-roles-selection>
+  <div class="options">
+    <div class="form-group pause-duration">
+      <p>Durée de pause</p>
+      <div class="range">
+        <button type="button" class="minus" (click)="inc('pauseDurationSeconds', -1)">-</button>
+        <span>{{options.pauseDurationSeconds}} s</span>
+        <button type="button" class="plus" (click)="inc('pauseDurationSeconds', 1)">+</button>
+      </div>
+    </div>
+    <div class="form-group discussion-duration">
+      <p>Durée du timer</p>
+      <div class="range">
+        <button type="button" class="minus" (click)="inc('discussionDurationMinutes', -1)">-</button>
+        <span>{{options.discussionDurationMinutes}} min</span>
+        <button type="button" class="plus" (click)="inc('discussionDurationMinutes', 1)">+</button>
+      </div>
+    </div>
+    <div class="form-group background-music">
+      <p>Sons d'ambiance</p>
+      <select name="backgroundMusic" [(ngModel)]="options.backgroundMusic">
+        <option *ngFor="let music of backgroundMusics" [value]="music">{{music}}</option>
+      </select>
+      <div class="slider-wrapper">
+        <input 
+          type="range" 
+          name="backgroundMusicVolumePercent" 
+          [(ngModel)]="options.backgroundMusicVolumePercent" 
+          min="0" 
+          max="100" 
+          step="any"
+          [class.muted]="options.backgroundMusicVolumePercent === 0"
+          [class.low]="options.backgroundMusicVolumePercent > 0 && options.backgroundMusicVolumePercent < 33"
+          [class.middle]="options.backgroundMusicVolumePercent >= 33 && options.backgroundMusicVolumePercent < 67"
+          [class.high]="options.backgroundMusicVolumePercent >= 67" />
+      </div>
+    </div>
+  </div>
+  <button type="submit">Créer une partie</button>
+</form>

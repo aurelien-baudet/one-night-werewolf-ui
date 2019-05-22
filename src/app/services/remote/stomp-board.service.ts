@@ -78,7 +78,7 @@ export class StompBoardService implements BoardService {
       board.currentRole,
       playerId
         ? this.mapPlayerBoard(board.boardsPerPlayerId[playerId])
-        : this.mapPlayerBoard(board.allPlayerBoards[0], true),
+        : this.mapPlayerBoard(board.allPlayerBoards[0], !board.ended),
       board.distributed,
       board.started,
       board.ended,

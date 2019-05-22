@@ -52,6 +52,9 @@ export class BoardComponent implements OnInit, OnChanges {
   }
 
   private distribute() {
+    if (!this.board) {
+      return;
+    }
     if (!this.enableDistributionEffect) {
       this.distributed = true;
     }

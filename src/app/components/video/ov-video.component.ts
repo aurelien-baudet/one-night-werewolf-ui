@@ -10,15 +10,15 @@ import { StreamManager } from 'openvidu-browser';
       [muted]="mutedSound"></video>`,
   styles: [`
         video {
-            -o-object-fit: cover;
-            object-fit: cover;
+            -o-object-fit: contain;
+            object-fit: contain;
             width: 100%;
             height: 100%;
             color: #ffffff;
             margin: 0;
             padding: 0;
             border: 0;
-            font-size: 100%;
+            font-size: 0;
         }
     `],
 })
@@ -66,7 +66,7 @@ export class OpenViduVideoComponent implements AfterViewInit, OnDestroy {
         this.elementRef.nativeElement.style.objectFit = 'contain';
         this.elementRef.nativeElement.style.background = '#878787';
       } else {
-        this.elementRef.nativeElement.style.objectFit = 'cover';
+        this.elementRef.nativeElement.style.objectFit = 'contain';
       }
       this._streamManager.addVideoElement(this.elementRef.nativeElement);
     }

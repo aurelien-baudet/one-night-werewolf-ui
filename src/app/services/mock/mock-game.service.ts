@@ -52,4 +52,8 @@ export class MockGameService implements GameService {
   public listGames(): Observable<Game[]> {
     return of([]);
   }
+
+  public listBackgroundMusics(): Observable<string[]> {
+    throw new Error("Method not implemented.");
+  }
 }

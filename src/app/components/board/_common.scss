@@ -1,7 +1,6 @@
 @import "../../../variables";
 @import "../../../mixins";
 
-// $cards-size-percent: 50%;
 $transition-duration: 0.2s;
 
 
@@ -23,14 +22,25 @@ $transition-duration: 0.2s;
     display: block;
     position: absolute;
     left: 0;
+    width: 100%;
     text-align: center;
-    text-shadow: 1px 1px 1px #000;
+    //text-shadow: 1px 1px 1px #000;
+    background: rgba(246, 248, 248, 0.4);
   }
 
   &.selected {
     border: 1px solid $selection-color;
   }
   
+  &.dead:before {
+    background: url('../../../assets/result/dead.png') center center no-repeat;
+  }
+  &.winner:before {
+    background: url('../../../assets/result/winner.png') center center no-repeat;
+  }
+  &.looser:before {
+    background: url('../../../assets/result/looser.png') center center no-repeat;
+  }
   &.dead:before,
   &.winner:before,
   &.looser:before {
@@ -41,20 +51,6 @@ $transition-duration: 0.2s;
     left: 0;
     width: 100%;
     height: 100%;
-    max-width: 475px;
-  }
-  &.dead:before {
-    background: url('../../../assets/result/dead.png') center center no-repeat;
-    opacity: 0.8;
-    background-size: contain;
-  }
-  &.winner:before {
-    background: url('../../../assets/result/winner.png') bottom center no-repeat;
-    opacity: 0.8;
-    background-size: contain;
-  }
-  &.looser:before {
-    background: url('../../../assets/result/looser.png') bottom center no-repeat;
     opacity: 0.8;
     background-size: contain;
   }
@@ -76,100 +72,93 @@ ov-video {
   position: absolute;
   display: block;
   width: 100%;
+  height: 100%;
 }
 
 
-// TODO
-.numPlayers4 {
-  .player {
-    width: 50%;
-    height: 50%;
-  }
-  .player.player0 {
-    top: 0;
-    left: 0;
-  }
-  .player.player1 {
-    top: 0;
-    right: 0;
-  }
-  .player.player2 {
-    bottom: 0;
-    left: 0;
-  }
-  .player.player3 {
-    bottom: 0;
-    right: 0;
-  }
-}
-
-
+.numPlayers4,
 .numPlayers5 {
   .player,
   .player-video {
     width: 30%;
     height: 30%;
+  }
+  .player.player0,
+  .player-video.player0,
+  .player.player1,
+  .player-video.player1 {
+    top: 50px;
 
-    ov-video /deep/ video {
-      max-width: 475px;
+    ov-video {
+      top: 0;
+    }
+    /deep/ video {
+      object-position: top;
+    }
+    /deep/ .name {
+      top: -22px;
+    }
+
+    &.dead:before,
+    &.looser:before,
+    &.winner:before {
+      background-position-y: top;
     }
   }
   .player.player0,
   .player-video.player0 {
-    top: 50px;
     left: 10px;
-
-    ov-video,
-    /deep/ .name {
-      top: 0;
-    }
   }
   .player.player1,
   .player-video.player1 {
-    top: 50px;
     right: 10px;
-
-    ov-video,
-    /deep/ .name {
-      top: 0;
-    }
   }
+
   .player.player2,
-  .player-video.player2 {
-    bottom: 50px;
-    left: 10px;
-
-    ov-video,
-    /deep/ .name {
-      bottom: 0;
-    }
-  }
+  .player-video.player2,
   .player.player3,
-  .player-video.player3 {
-    bottom: 0;
-    left: 34.5%;
-    margin-left: 1px;
-
-    ov-video,
-    /deep/ .name {
-      bottom: 0;
-    }
-  }
+  .player-video.player3,
   .player.player4,
   .player-video.player4 {
     bottom: 50px;
-    right: 10px;
 
-    ov-video,
-    /deep/ .name {
+    ov-video {
       bottom: 0;
     }
+    /deep/ video {
+      object-position: bottom;
+    }
+    /deep/ .name {
+      bottom: -22px;
+    }
+
+    &.dead:before,
+    &.looser:before,
+    &.winner:before {
+      background-position-y: bottom;
+    }
+  }
+
+  .player.player2,
+  .player-video.player2 {
+    left: 10px;
+  }
+  .player.player3,
+  .player-video.player3 {
+    right: 10px;
+  }
+  .player.player4,
+  .player-video.player4 {
+    bottom: 0;
+    left: 34.5%;
+    margin-left: 1px;
   }
 }
 
 
 
 @media (max-height: 350px) {
+  .numPlayers4,
   .numPlayers5 {
     .player.player0,
     .player-video.player0,
@@ -180,30 +169,16 @@ ov-video {
   } 
 }
 
-@media (max-width: 400px) {
+
+@media (max-width: 800px) {
+  .numPlayers4,
   .numPlayers5 {
-    .player,
-    .player-video {
-      &.dead:before {
-        // TODO: more flexible
-        background-size: auto 81px;
-      }
-      &.looser:before,
-      &.winner:before {
-        background-size: contain;
-      }
-    }
     .player.player0,
     .player-video.player0,
     .player.player1,
     .player-video.player1 {
-      &.dead:before {
-        background-position-y: top;
-      }
-      &.looser:before,
-      &.winner:before {
-        // TODO: more flexible
-        background-position-y: 57px;
+      /deep/ .name {
+        top: -16px;
       }
     }
     .player.player2,
@@ -212,82 +187,10 @@ ov-video {
     .player-video.player3,
     .player.player4,
     .player-video.player4 {
-      &.dead:before {
-        background-position-y: bottom;
+      /deep/ .name {
+        bottom: -16px;
       }
-      // &.looser:before,
-      // &.winner:before {
-      //     // TODO: more flexible
-      //     background-position-y: 57px;
-      // }
     }
   }
 }
 
-
-@media (min-width: 1580px) {
-  .numPlayers5 {
-    .player,
-    .player-video {
-      height: 42%;
-    }
-    .player.player0,
-    .player-video.player0 {
-      &:before {
-        right: 0;
-        left: auto;
-      }
-      ov-video /deep/ video {
-        margin-right: 0;
-        margin-left: auto;
-      }
-    }
-    .player.player1,
-    .player-video.player1 {
-      &:before {
-        left: 0;
-        right: auto;
-      }
-      ov-video /deep/ video {
-        margin-left: 0;
-        margin-right: auto;
-      }
-    }
-    .player.player2,
-    .player-video.player2 {
-      &:before {
-        right: 0;
-        left: auto;
-      }
-      ov-video /deep/ video {
-        margin-right: 0;
-        margin-left: auto;
-      }
-    }
-    .player.player3,
-    .player-video.player3 {
-      &:before {
-        width: auto;
-        left: 0;
-        right: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      ov-video /deep/ video {
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-    .player.player4,
-    .player-video.player4 {
-      &:before {
-        left: 0;
-        right: auto;
-      }
-      ov-video /deep/ video {
-        margin-left: 0;
-        margin-right: auto;
-      }
-    }
-  } 
-}

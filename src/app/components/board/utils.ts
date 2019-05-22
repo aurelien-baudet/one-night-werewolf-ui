@@ -16,7 +16,8 @@ export class BoardUtils {
 
 export class Selection<T> {
   constructor(private identity: (t: T) => any,
-              private event?: EventEmitter<T>) {}
+              private event?: EventEmitter<T>,
+              private cb?: (T) => void) {}
 
   private selected: T;
 
@@ -25,6 +26,9 @@ export class Selection<T> {
       this.selected = null;
     } else {
       this.selected = selected;
+    }
+    if (this.cb) {
+      this.cb(this.selected);
     }
     if (this.event) {
       this.event.emit(this.selected);

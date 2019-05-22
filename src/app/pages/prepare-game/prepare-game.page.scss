@@ -1,8 +1,60 @@
+@import "../../../variables";
+
 :host {
   display: block;
   text-align: center;
+  height: 100%;
 }
 
 button {
   margin: 10px;
+  align-self: center;
 }
+
+form {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.form-group {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  margin: 5px;
+  max-width: 200px;
+  
+  p {
+    font-size: 1.5em;
+    margin: 0;
+    color: $message-text-color;
+  }
+
+  input[type=range]:before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    padding-right: 10px;
+  }
+  input[type=range].muted:before {
+    background: url(../../../assets/general/muted-24x24.png) center center no-repeat;
+  }
+  input[type=range].low:before {
+    background: url(../../../assets/general/low-volume-24x24.png) center center no-repeat;
+  }
+  input[type=range].middle:before {
+    background: url(../../../assets/general/middle-volume-24x24.png) center center no-repeat;
+  }
+  input[type=range].high:before {
+    background: url(../../../assets/general/high-volume-24x24.png) center center no-repeat;
+  }
+}
+

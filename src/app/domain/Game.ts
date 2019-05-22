@@ -21,7 +21,7 @@ export interface GameOptions {
   backgroundMusicVolume: number;
 }
 export class DefaultGameOptions implements GameOptions {
-  pauseDuration = 2000;
+  pauseDuration = 5000;
   discussionDuration = 300000;
   guidedMode = false;
   backgroundMusic = 'fantasy';

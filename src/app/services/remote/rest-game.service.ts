@@ -35,4 +35,24 @@ export class RestGameService implements GameService {
   public listGames(): Observable<Game[]> {
     return this.http.get<Game[]>(`${this.backendConfig.url}/games`);
   }
+
+  public listBackgroundMusics(): Observable<string[]> {
+    return of([
+      'alien',
+      'cards',
+      'crickets',
+      'disco',
+      'dramatic',
+      'fantasy',
+      'horror',
+      'pop',
+      'rock',
+      'romp',
+      'southern',
+      'spaghetti',
+      'tense',
+      'upbeat',
+      'wolves'
+    ]);
+  }
 }
