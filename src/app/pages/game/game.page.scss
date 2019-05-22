@@ -12,7 +12,7 @@ app-voting-board,
 app-video-board {
   display: block;
   position: absolute;
-  top: 0;
+  top: 20px;
   left: 0;
   right: 0;
   bottom: 138px;
@@ -44,11 +44,26 @@ app-timer,
 .distribute {
   position: relative;
   z-index: 1000;
-  top: -25px;
+  top: -37px;
 }
 
 p {
   margin: 0;
+}
+
+
+@media (max-width: 800px) {
+  app-board,
+  app-voting-board,
+  app-video-board {
+    top: 0
+  }
+  
+  .start,
+  .restart,
+  .distribute {
+    top: -25px;
+  }
 }
 
 @media (max-width: 400px) {

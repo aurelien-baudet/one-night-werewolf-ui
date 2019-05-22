@@ -49,14 +49,13 @@ button.quit {
   &::before {
     content: 'x';
     font-size: 20px;
-    // vertical-align: top;
   }
 }
 
 .players-container,
 app-video-board /deep/ .videos-container {
   position: absolute;
-  top: 120px;
+  top: 160px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -86,6 +85,11 @@ app-video-board /deep/ .videos-container {
 
 
 @media (max-width: 800px) {
+  .players-container,
+  app-video-board /deep/ .videos-container {
+    top: 120px;
+  }
+
   p {
     margin: 2px;
   }
@@ -120,10 +124,6 @@ app-video-board /deep/ .videos-container {
     }
   }
   
-  // .players-container,
-  // app-video-board /deep/ .videos-container {
-    //     top: 40px;
-    // }
     
     .waiting {
       background: url('../../../assets/players/user-64.png') no-repeat center center;
